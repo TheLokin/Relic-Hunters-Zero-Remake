@@ -183,18 +183,18 @@ if (!global.pause) {
 		#region Animation.
 			
 			if (is_meleeing || is_throwing) {
-				play_animation(animation.melee, 0.25, an_clamp_forever, 99, 9);
+				play_animation(animation.melee, 0.25, an_clamp_forever, pr_high);
 			} else {
 				if (move_speed > 0) {
 					if (is_sprinting) {
-						play_animation(animation.sprint, 0.2, an_loop, 1, 6);
+						play_animation(animation.sprint, 0.16, an_loop, pr_low);
 					} else if (is_dodging) {
-						play_animation(animation.dash, 0.2, an_loop, 1, 6);
+						play_animation(animation.dash, 0.16, an_loop, pr_low);
 					} else {
-						play_animation(animation.walk, 0.2, an_loop, 1, 6);
+						play_animation(animation.walk, 0.16, an_loop, pr_low);
 					}
 				} else {
-					play_animation(animation.idle, 0.2, an_loop, 1, 6);
+					play_animation(animation.idle, 0.16, an_loop, pr_low);
 				}
 			}
 			//depth = -y;

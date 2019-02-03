@@ -2,32 +2,12 @@
  *	update_animation()
  *
  *	Run this function in each step to plays the animations.
+ *
+ *	Returns: N/A.
  */
 
 animation_index += animation_speed;
 
-#region Type control.
-
-	switch (animation_type) {
-		case an_loop:
-	        if (animation_index >= animation_frames-1) {
-				animation_index = 0;
-			}
-	    break;
-	    case an_clamp:
-	        if (animation_index >= animation_frames-1) {
-	            animation_index = animation_frames-1;
-	            animation_priority = 0;
-	        }
-	    break;
-	    case an_clamp_forever:
-	        if (animation_index >= animation_frames-1) {
-	            animation_index = animation_frames-1;
-	        }
-	    break;
-	}
-
-#endregion
 #region Switch animation.
 
 	switch (current_animation) {
@@ -57,6 +37,31 @@ animation_index += animation_speed;
 	    break;
 	}
 	
+#endregion
+#region Type control.
+	
+	var _frames = sprite_get_number(sprite_index)-1;
+	
+	switch (animation_type) {
+		case an_loop:
+	        if (animation_index >= _frames) {
+				animation_index = 0;
+			}
+	    break;
+	    case an_clamp:
+			var 
+	        if (animation_index >= _frames) {
+	            animation_index = _frames;
+	            animation_priority = pr_low;
+	        }
+	    break;
+	    case an_clamp_forever:
+	        if (animation_index >= _frames) {
+	            animation_index = _frames;
+	        }
+	    break;
+	}
+
 #endregion
 
 image_index = animation_index;

@@ -2,6 +2,8 @@
  *	input_key_up()
  *
  *	Returns true if the key to move up is pressed or false otherwise.
+ *
+ *	Returns: Boolean.
  */
 
 return keyboard_check_direct(controller_game.option_keyboard[0, 0]) ||

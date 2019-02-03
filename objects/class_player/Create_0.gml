@@ -96,10 +96,9 @@
 	}
 	current_animation = animation.idle;
 	animation_index = 0;
-	animation_speed = 0.2;
+	animation_speed = 0.16;
 	animation_type = an_loop;
-	animation_priority = 1;
-	animation_frames = 6;
+	animation_priority = pr_low;
 	
 #endregion
 #region Vida
