@@ -9,6 +9,7 @@ event_inherited();
 #endregion
 #region Animation.
 
+	sprite_face = spr_ass_face;
 	sprite_idle = spr_ass_idle;
 	sprite_walk = spr_ass_walk;
 	sprite_sprint = spr_ass_sprint;

@@ -20,8 +20,8 @@
 #endregion
 
 if (_priority >= animation_priority && current_animation != _animation) {
+	current_animation = _animation;
 	animation_index = 0;
-    animation_current = _animation;
     animation_speed = _speed;
     animation_type = _type;
     animation_priority = _priority;

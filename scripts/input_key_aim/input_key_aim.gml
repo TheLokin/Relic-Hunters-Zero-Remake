@@ -1,5 +1,7 @@
-/// @function input_key_aim()
-/// @description Devuelve true si se está pulsando la tecla para apuntar o false en caso contrario.
-/// @return boolean
+/*
+ *	input_key_aim()
+ *
+ *	Returns true if the key to aim is pressed or false otherwise.
+ */
 
 return mouse_check_button(mb_right);

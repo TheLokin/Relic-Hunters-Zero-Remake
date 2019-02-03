@@ -19,22 +19,18 @@
 	move_speed = 0;
 	move_direction = 0;
 	
-	move_speed_max = 5.5;
+	move_speed_max = 4;
 	
 	is_aiming = false;
 	aiming_speed_max = 3;
-
-
-	/*move_x = 0;			// Movimiento en el eje horizontal.
-	move_y = 0;			// Movimiento en el eje vertical.
-	max_speed =	2;				// Velocidad de movimiento máxima.
-	acceleration = 1;		// Aceleración.*/
+	
+	instance_create_layer(0, 0, "GUI", player_hud);
 
 #endregion
 #region Sprint.
 
 	is_sprinting = false;
-	sprint_speed_max = 7.5;
+	sprint_speed_max = 6;
 	sprint_stamina = 0.3;			// Coste en estamina de cada sprint.
 	sprint_stamina_min = 10;		// Estamina mínima para poder sprintar.
 
@@ -78,6 +74,7 @@
 #endregion
 #region Animation.
 
+	sprite_face = noone;
 	sprite_idle = noone;
 	sprite_walk = noone;
 	sprite_sprint = noone;
@@ -99,13 +96,12 @@
 	}
 	current_animation = animation.idle;
 	animation_index = 0;
-	animation_speed = 0;
-	animation_type = noone;
-	animation_priority = 0;
-	animation_frames = 0;
+	animation_speed = 0.2;
+	animation_type = an_loop;
+	animation_priority = 1;
+	animation_frames = 6;
 	
 #endregion
-/*
 #region Vida
 
 	hp_max = 100;						// Vida máxima.			
@@ -114,8 +110,8 @@
 	hp_regen_time_current = 0;			// Tiempo entre regeneraciones.
 	hp_regen_amount = 2;				// Máximo de regeneraciones.
 
-#endregion*/
-/*#region Energía
+#endregion
+#region Energía
 
 	energy_max = 100;									// Energía máxima.
 	energy = energy_max;								// Energía.
@@ -123,10 +119,10 @@
 	energy_regen_time_regular = energy_regen_time;		// Tiempo de regeneración base.
 	energy_regen_time_relic = energy_regen_time;		// Tiempo de regeneración con reliquias.
 	
-	over_shield = 0;				// Sobre escudo.
-	super_shield = false;		// Super escudo.
+	overshield = 0;				// Sobre escudo.
+	supershield = false;		// Super escudo.
 
-#endregion*/
+#endregion
 #region Estamina
 
 	stamina_max = 100;											// Estamina máxima.

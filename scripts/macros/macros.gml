@@ -1,9 +1,9 @@
 #region Animation.
 
-	#macro ms_to_s 0.000001
+	#macro ms_to_s 0.000001 //sin usar
 	#macro ms_to_s_60 0.00006
-	#macro s_to_ms 1000000
-	#macro s_to_ms_60 60000000
+	#macro s_to_ms 1000000 // sin usar
+	#macro s_to_ms_60 60000000 // sin usar
 	#macro an_loop 0
 	#macro an_clamp 1
 	#macro an_clamp_forever 2

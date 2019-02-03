@@ -1,28 +1,18 @@
 {
-    "id": "9c611a38-5127-4876-8470-9e9951c46134",
+    "id": "223c6144-31f5-4199-b33b-cb2027bc9121",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "fx_sprint",
+    "name": "player_hud",
     "eventList": [
         {
-            "id": "e144ff9c-91c8-45ea-befb-7024eb70ee3c",
+            "id": "ba86cfa8-6296-4df9-b9ed-fb39779e9ad9",
             "modelName": "GMEvent",
             "mvc": "1.0",
             "IsDnD": false,
             "collisionObjectId": "00000000-0000-0000-0000-000000000000",
-            "enumb": 7,
-            "eventtype": 7,
-            "m_owner": "9c611a38-5127-4876-8470-9e9951c46134"
-        },
-        {
-            "id": "7b3d6f50-6c01-4ca8-a1db-21f1301f8cae",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
-            "enumb": 5,
-            "eventtype": 7,
-            "m_owner": "9c611a38-5127-4876-8470-9e9951c46134"
+            "enumb": 64,
+            "eventtype": 8,
+            "m_owner": "223c6144-31f5-4199-b33b-cb2027bc9121"
         }
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
@@ -43,6 +33,6 @@
     "physicsStartAwake": true,
     "properties": null,
     "solid": false,
-    "spriteId": "f437a4cd-ce04-413d-a9a2-033befff190a",
+    "spriteId": "00000000-0000-0000-0000-000000000000",
     "visible": true
 }
