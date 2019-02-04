@@ -7,9 +7,10 @@
 #endregion
 #region Spawn.
 
-	is_vulnerable = false;				// Vulnerable player.
-	vulnerable_time = room_speed*2;		// Minimum time to become vulnerable.
-	alarm[0] = vulnerable_time;			// Cooldown to become vulnerable.
+	is_vulnerable = false;								// Vulnerable player.
+	vulnerable_time = room_speed*2;						// Minimum time to become vulnerable.
+	alarm[0] = vulnerable_time;							// Cooldown to become vulnerable.
+	instance_create_layer(0, 0, "GUI", player_hud);		// Hud.
 
 #endregion
 #region Movement.
@@ -23,8 +24,6 @@
 	
 	is_aiming = false;
 	aiming_speed_max = 3;
-	
-	instance_create_layer(0, 0, "GUI", player_hud);
 
 #endregion
 #region Sprint.

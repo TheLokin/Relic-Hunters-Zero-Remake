@@ -378,7 +378,7 @@
             "Key": "26a1675a-6a4d-47da-a82f-04c5497bfc45",
             "Value": {
                 "id": "efcec3f5-893a-4d77-8f0d-eabd17f6a36b",
-                "resourcePath": "scripts\\draw_bar\\draw_bar.yy",
+                "resourcePath": "scripts\\draw_bar_delayed\\draw_bar_delayed.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -1578,7 +1578,7 @@
             "Key": "c80ef54a-a6b6-42b0-ad27-bdc7647e2df6",
             "Value": {
                 "id": "151aebfc-6a0b-444e-a695-84c30bd47e40",
-                "resourcePath": "sprites\\spr_icon_sheald\\spr_icon_sheald.yy",
+                "resourcePath": "sprites\\spr_icon_shield\\spr_icon_shield.yy",
                 "resourceType": "GMSprite"
             }
         },

@@ -163,7 +163,7 @@ if (!global.pause) {
 				stamina += stamina_regeneration;
 			}
 			if (stamina > stamina_max) {
-				stamina = stamina = stamina_max;
+				stamina = stamina_max;
 			}
 		
 		#endregion

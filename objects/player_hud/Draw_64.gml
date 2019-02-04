@@ -15,45 +15,72 @@ if (instance_exists(class_player)) {
 		} else if (_hp < _hp_max*0.6) {
 			_hud_image = 1;
 		} 
-		draw_sprite(player.sprite_face, _hud_image, 16, 16);
-		
-		var _health_bar_width = 124;
-		var _health_bar_height = 16;
-		
+		draw_sprite(player.sprite_face, _hud_image, face_x, face_y);
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
-        draw_rectangle(64, 24, 64+_health_bar_width, 24+_health_bar_height, false);
+        draw_rectangle(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, false);
         draw_set_alpha(0.9);
-		draw_healthbar(64, 24, 64+_health_bar_width, 24+_health_bar_height, _hp/_hp_max*100, c_health, c_black, c_white, 0, false, false);
+		var _delay_speed = 0.008;
+		var _delay_time = room_speed*0.6;
+		var _delay_value = 0;
 		
-		draw_sprite(spr_icon_health, 0, 64, 24);
+		if (true) {
+			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, _hp/_hp_max*100, c_black, c_white, c_white, 0, false, false);
+			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, _delay_value/_hp_max*100, c_black, c_health, c_health, 0, false, false);
+		} else {
+			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, _delay_value/_hp_max*100, c_black, c_health, c_health, 0, false, false);
+			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, _hp/_hp_max*100, c_black, c_white, c_white, 0, false, false);
+		}
+		draw_sprite(spr_icon_health, 0, health_bar_x, health_bar_y);
 		draw_set_color(c_white);
 		draw_set_font(get_font(ft_medium));
-		draw_text(64+_health_bar_width, 24+_health_bar_height/2, string(_hp));
-		
-        /*draw_healthbar_delayed(delayedCharHealthBar1[playerId], charLifeBarTopX-5,charLifeBarTopY-5,charLifeBarTopX+charLifeBarWidth-5,charLifeBarTopY+charLifeBarHeight-5, hp, hp_max, charLifeColor, c_black, c_white, charBarDelaySpeed, charBarDelayTime, 0, false, false);
-        draw_sprite_ext(spr_icon_health,0,charLifeBarTopX+20,charLifeBarTopY+20,1.5,1.5,0,c_white,main_hud_alpha);
-        draw_set_color(c_white);
-        draw_set_font(global.font_numberLarge);
-        draw_text(charLifeBarTopX+charLifeBarWidth-14, charLifeBarTopY+14,string(_hp));*/
+		draw_text(health_text_x, health_text_y, string(round(_hp)));
 	
 	#endregion
 	#region Shield.
 	
 		var _energy = player.energy;
 		var _energy_max = player.energy_max + player.overshield;
-		var _shield_bar_width = 48;
-		var _shield_bar_height = 36;
 		
 		draw_set_color(c_black);
 		draw_set_alpha(0.8);
-		//draw_rectangle(64, );
+		draw_rectangle(shield_bar_x, shield_bar_y, shield_bar_x+shield_bar_width, shield_bar_y+shield_bar_height, false);
+		draw_set_alpha(0.9);
+		
+		draw_sprite(spr_icon_shield, 0, shield_bar_x, shield_bar_y);
+		draw_set_color(c_white);
+		draw_set_font(get_font(ft_medium));
+		draw_text(shield_text_x, shield_text_y, string(round(_hp)));
 	
 	#endregion
 	#region Stamina.
 	
 		var _stamina = player.stamina;
 		var _stamina_max = player.stamina_max;
+		
+		draw_set_color(c_black);
+		draw_set_alpha(0.8);
+		draw_rectangle(stamina_bar_x, stamina_bar_y, stamina_bar_x+stamina_bar_width, stamina_bar_y+stamina_bar_height, false);
+		if (_stamina > _stamina_max/2) {
+			var _stamina_color = c_white;
+		} else {
+			var _stamina_color = c_gray;
+		}
+		draw_healthbar(stamina_bar_x+stamina_border, stamina_bar_y+stamina_border, stamina_bar_x+stamina_bar_width/2-stamina_border,
+					   stamina_bar_y+stamina_bar_height-stamina_border, min(1, _stamina/(_stamina_max/2))*100, c_black,
+					   _stamina_color, _stamina_color, 0, false, false);
+		var _stamina_secundary = _stamina-_stamina_max/2;
+		
+		if (_stamina_secundary > 0) {
+			if (_stamina == _stamina_max) {
+				_stamina_color = c_white;
+			} else {
+				_stamina_color = c_gray;
+			}
+			draw_healthbar(stamina_bar_x+stamina_bar_width/2+stamina_border, stamina_bar_y+stamina_border,
+						   stamina_bar_x+stamina_bar_width-stamina_border, stamina_bar_y+stamina_bar_height-stamina_border,
+						   _stamina_secundary/(_stamina_max/2)*100, c_black, _stamina_color, _stamina_color, 0, false, false);
+		} 
 	
 	#endregion
 	
