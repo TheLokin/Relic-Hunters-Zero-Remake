@@ -1,11 +1,16 @@
-/// @function gamepad_check()
-/// @description Devuelve true si se pulsa algún botón del mando, en caso contrario devuelve false.
-/// @param gamepad
-/// @return joystick
+/*
+ *	gamepad_check(gamepad)
+ *
+ *	Returns true if any button on the gamepad is pressed or false otherwise.
+ *
+ *	gamepad: gamepad to check.
+ *
+ *	Returns: Boolean.
+ */
 
-#region Parámetros.
+#region Parameters.
 
-	var _gamepad = argument0;		// Mando.
+	var _gamepad = argument0;
 
 #endregion
 

@@ -4,89 +4,99 @@ if (!global.pause) {
 	if (!is_digging && current_animation != animation.dig) {
 		speed = move_speed;
 		direction = move_direction;
-		var _gamepad = get_gamepad_connected();
-	
-		if (_gamepad != noone) {
-			#region Movement.
+		
+		#region Movement.
 			
-				var _horizontal_axis = gamepad_axis_value(_gamepad, gp_axislh);
-				var _vertical_axis = gamepad_axis_value(_gamepad, gp_axislv);
+			if (gamepad_check(global.gamepad)) {
+				var _horizontal_axis = gamepad_axis_value(global.gamepad, gp_axislh);
+				var _vertical_axis = gamepad_axis_value(global.gamepad, gp_axislv);
 	
 				if (joystick_deadzone_check(_horizontal_axis, _vertical_axis, joy_deadzone)) {
 					var _joystick_direction = point_direction(0, 0, _horizontal_axis, _vertical_axis);
+					
 					motion_add(_joystick_direction, move_acceleration*delta_time*ms_to_s_60);
 				}
-			
-			#endregion
-		} else {
-			#region Movement.
-			
-				if (input_key_up() && !input_key_left() && !input_key_right()) {
+			} else {
+				if (input_keyboard_up() && !input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(90, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_down() && !input_key_left() && !input_key_right()) {
+				if (input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(270, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_left() && !input_key_up() && !input_key_down()) {
+				if (input_keyboard_left() && !input_keyboard_up() && !input_keyboard_down()) {
 					motion_add(180, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_right() && !input_key_up() && !input_key_down()) {
+				if (input_keyboard_right() && !input_keyboard_up() && !input_keyboard_down()) {
 					motion_add(0, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_left() && input_key_up()) {
+				if (input_keyboard_left() && input_keyboard_up()) {
 					motion_add(135, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_left() && input_key_down()) {
+				if (input_keyboard_left() && input_keyboard_down()) {
 					motion_add(225, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_right() && input_key_up()) {
+				if (input_keyboard_right() && input_keyboard_up()) {
 					motion_add(45, move_acceleration*delta_time*ms_to_s_60);
 				}
-				if (input_key_right() && input_key_down()) {
+				if (input_keyboard_right() && input_keyboard_down()) {
 					motion_add(315, move_acceleration*delta_time*ms_to_s_60);
 				}
-			
-			#endregion
-			#region Sprint.
-			
-				if (input_key_sprint() && !is_meleeing) {
-					if (is_sprinting && stamina < sprint_stamina) {
-						is_sprinting = false;
-					} else if (stamina >= sprint_stamina_min) {
-						is_sprinting = true;
-					}
-				}
-				if (is_sprinting && (stamina < sprint_stamina || is_meleeing)) {
-					is_sprinting = false;
-				}
-			
-			#endregion
-			#region Dodge.
-			
-				if (input_key_sprint_released()) {
-					/*if (stamina >= ) {
-					
-					}*/
-				}
-			
-			#endregion
-			// Aim.
-			if (input_key_aim() && !is_sprinting && !is_meleeing) {
-				is_aiming = true;
-			} else {
-				is_aiming = false;
 			}
-		}
-	
-		#region Friction.
-		
-			if (is_dodging) {
-				motion_add(direction-180, min(speed, dodge_friction*delta_time*ms_to_s_60));
-			} else {
-				motion_add(direction-180, min(speed, move_friction*delta_time*ms_to_s_60));
-			}
-		
+			
 		#endregion
+		#region Sprint.
+			
+			if (!is_meleeing && (input_keyboard_sprint() || input_gamepad_sprint())) {
+				if (is_sprinting && stamina < sprint_stamina) {
+					is_sprinting = false;
+					alarm[1] = sprint_delay;
+				} else if (can_sprint && stamina >= sprint_stamina_min) {
+					is_sprinting = true;
+					can_sprint = false;
+				}
+			} else if (input_keyboard_sprint_released() || input_gamepad_sprint_released()) {
+				is_sprinting = false;
+				alarm[1] = sprint_delay;
+			}
+			
+		#endregion
+		#region Dodge.
+			
+			/*if (input_keyboard_up()) {
+				if (dodge_direction == 90)
+			}
+			
+			if (!is_meleeing && input_keyboard_sprint_released() && current_dash_time <= dash_time) {
+				if (stamina >= dodge_stamina) {
+					stamina -= dodge_stamina;
+					is_dodging = true;
+					speed = dodge_speed;
+				} else {
+					
+				}
+			}
+			
+			if (is_dodging) {
+				current_dodge_time += delta_time;
+				if (current_dodge_time >= dodge_time) {
+					current_dodge_time = 0;
+					is_dodging = false;
+				}
+			}*/
+			
+		#endregion
+		// Aim.
+		if (!is_sprinting && !is_meleeing && input_key_aim()) {
+			is_aiming = true;
+		} else {
+			is_aiming = false;
+		}
+		
+		// Melee cancel
+		if (is_melee_dashing && speed == 0) {
+			is_melee_dashing = false;
+		}
+		
 		#region Speed.
 		
 			var _speed_vector = 1;
@@ -113,11 +123,15 @@ if (!global.pause) {
 			}
 			
 		#endregion
-		// Melee cancel
-		if (is_melee_dashing && speed == 0) {
-			is_melee_dashing = false;
-		}
+		#region Friction.
 		
+			if (is_dodging) {
+				motion_add(direction-180, min(speed, dodge_friction*delta_time*ms_to_s_60));
+			} else {
+				motion_add(direction-180, min(speed, move_friction*delta_time*ms_to_s_60));
+			}
+		
+		#endregion
 		#region Collisions.
 		
 			move_speed = speed;
@@ -148,22 +162,23 @@ if (!global.pause) {
 				}
 			} else {
 				is_sprinting = false;
+				alarm[1] = sprint_delay;
 			}
 			
 		#endregion
-		#region Control stamina.
+		#region Stamina.
 		
 			if (is_sprinting) {
 				stamina -= sprint_stamina;
-			}
-			if (stamina < 0) {
-				stamina = 0;
+				if (stamina < 0) {
+					stamina = 0;
+				}
 			}
 			if (!is_sprinting && !is_dodging && !is_meleeing && !is_throwing) {
 				stamina += stamina_regeneration;
-			}
-			if (stamina > stamina_max) {
-				stamina = stamina_max;
+				if (stamina > stamina_max) {
+					stamina = stamina_max;
+				}
 			}
 		
 		#endregion
@@ -187,6 +202,12 @@ if (!global.pause) {
 			} else {
 				if (move_speed > 0) {
 					if (is_sprinting) {
+						if (current_animation != animation.sprint) {
+							var _sprint_fx = instance_create_layer(x, y, "Fx", class_fx);
+							
+							_sprint_fx.sprite_index = sprite_sprint_fx;
+							_sprint_fx.image_xscale = image_xscale;
+						}
 						play_animation(animation.sprint, 0.16, an_loop, pr_low);
 					} else if (is_dodging) {
 						play_animation(animation.dash, 0.16, an_loop, pr_low);
