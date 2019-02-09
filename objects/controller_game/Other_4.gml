@@ -1,4 +1,4 @@
-/// @description Habitaciones
+/// @description Rooms
 		
 switch (room) {
 	case rm_init:	
@@ -13,5 +13,10 @@ switch (room) {
 		if (!audio_is_playing(bgm_menu)) {
 			audio_play_sound(bgm_menu, 1, true);
 		}
+	break;
+	default:
+		global.player = instance_create_layer(224, 192, "Player", ace_player);
+		add_owner("player", global.player);
+		instance_create_layer(0, 0, "Hud", player_hud);
 	break;
 }

@@ -6,4 +6,4 @@
  *	Returns: Boolean.
  */
 
-return keyboard_check_released(vk_space);
+return keyboard_check_released(global.keyboard_sprint);

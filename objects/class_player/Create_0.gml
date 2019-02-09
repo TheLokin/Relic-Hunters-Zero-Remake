@@ -1,16 +1,16 @@
 /// @description Variables
 
 #region Information.
-
-	name = "NO NAME";		// Name.
-
+	
+	owner = noone;			// The owner who performs the actions.
+	name = "NO NAME";		// Player name.
+	
 #endregion
 #region Spawn.
 
 	is_vulnerable = false;										// If the player is vulnerable.
-	invulnerable_time = room_speed*2;							// Time to become the player vulnerable.
-	alarm[0] = invulnerable_time;								// Cooldown to become the player vulnerable.
-	hud = instance_create_layer(0, 0, "Hud", player_hud);		// Hud.
+	invulnerable_duration = room_speed*2;						// Duration until the player is vulnerable.
+	alarm[0] = invulnerable_duration;							// Cooldown to become the player vulnerable.
 
 #endregion
 #region Health.
@@ -22,11 +22,11 @@
 	hp_regen_amount = 2;					// Máximo de regeneraciones.
 
 #endregion
-#region Energía.
+#region Energy.
 
-	energy_max = 100;											// Energía máxima.
-	energy = energy_max;										// Energía.
-	energy_regeneration_time = room_speed*2.5;					// Tiempo de regeneración.
+	energy_max = 100;								// Maximum energy.
+	energy = energy_max;							// Energy.
+	energy_regeneration_time = room_speed*2.5;		// Regeneration time.
 	
 	//energy_regeneration_time_regular = energy_regeneration_time;		// Tiempo de regeneración base.
 	//energy_regeneration_time_relic = energy_regeneneration_time;			// Tiempo de regeneración con reliquias.
@@ -47,41 +47,39 @@
 #endregion
 #region Movement.
 
-	move_acceleration = 1.5;
-	move_friction = 0.45;
-	move_speed = 0;
-	move_direction = 0;
-	
-	move_speed_max = 4;
-	
-	is_aiming = false;
-	aiming_speed_max = 3;
+	move_acceleration = 1.5;		// Player acceleration.
+	move_friction = 0.45;			// Friction when the player is walking.
+	move_speed = 0;					// Player speed.
+	move_direction = 0;				// Player direction.
+
+#endregion
+#region Walk.
+
+	walk_speed_max = 4;					// Speed when the player is walking.
+	footstep_time = room_speed*0.2;		//
+	current_footstep_time = 0;			//
 
 #endregion
 #region Sprint.
 
 	is_sprinting = false;				// If the player's state is sprinting.
-	sprint_speed_max = 5.5;				// Speed sprinting.
+	sprint_speed_max = 5.5;				// Speed when the player is sprinting.
 	can_sprint = true;					// Sprint available.
-	sprint_delay = room_speed*0.2;		// Delay between sprints.
+	sprint_delay = room_speed*0.2;		// Delay between two sprints.
 	sprint_stamina = 0.3;				// Stamina cost of each sprint.
 	sprint_stamina_min = 10;			// Minimum stamina to sprint.
 
 #endregion
-#region Dodge.
+#region Dash.
 
-	is_dodging = false;					// If the player's state is dodging.
-	dodge_friction = 0.2;
-	dodge_stamina = stamina_max/2;		// Coste en estamina de cada esquive.
-	
-	dodge_speed = 35;
-	current_dodge_time = 0;
-	dodge_time = room_speed*0.4;
-	
-	dodge_direction = 0;
-	
-	current_dash_time = 0;
-	dash_time = room_speed*0.25;
+	is_dashing = false;					// If the player's state is dashing.
+	dash_friction = 0.2;				// Friction when the player is dashing.
+	dash_speed = 10;					// Speed when the player is dashing.
+	dash_duration = 400000;				// Duration of the dash in milliseconds.
+	current_dash_time = 0;				// Milliseconds since the dash started.
+	double_tap_timer = 0;				// Number of times that the button has been pressed.
+	double_tap_interval = 0;			// Interval of steps elapsed between two taps.
+	dash_stamina = stamina_max/2;		// Stamina cost of each dash.
 
 #endregion
 #region Melee.
@@ -89,30 +87,28 @@
 	is_meleeing = false;
 	is_melee_dashing = false;
 	melee_hit_frame = 5;
-	
-	melee_stamina = 0;		// Coste en estamina de golpear cuerpo a cuerpo.
 
 #endregion
-#region Throw granade.
+#region Throw grenade.
 
-	is_throwing = false;
+	is_throwing = false;		// If the player is throwing a grenade.
 
 #endregion
 #region Dig.
 
-	is_digging = false;
-	dig_depth = 0;
+	is_digging = false;		// If the player's state is digging.
 	dig_speed = 0;
+	dig_depth = 0;
 	dig_depth_max = 42; //Esto igual es la mitad
 	dig_rate = room_speed*0.3;
 	current_dig_rate = dig_rate;
 	dir_color = c_magenta;
 
 #endregion
-#region Footsteps.
+#region Aim.
 
-	footstep_time = room_speed*0.2;
-	current_footstep_time = 0;
+	is_aiming = false;			// If the player's state is aiming.	
+	aiming_speed_max = 3;		// Speed when the player is aiming.
 
 #endregion
 #region Animation.
@@ -128,16 +124,6 @@
 	sprite_melee = noone;						// Sprite with the animation when the player is meleeing.
 	sprite_dig = noone;							// Sprite with the animation when the player is digging.
 	sprite_death = noone;						// Sprite with the animation when the player dies.
-	enum animation {							// Animations that can be played.
-		idle,
-		walk,
-		sprint,
-		dash,
-		hit,
-		melee,
-		dig,
-		death
-	}
 	current_animation = animation.idle;			// Animation playing.
 	animation_index = 0;						// Frame of the animation.
 	animation_speed = 0.16;						// Speed of the animation.

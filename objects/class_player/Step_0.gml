@@ -4,6 +4,7 @@ if (!global.pause) {
 	if (!is_digging && current_animation != animation.dig) {
 		speed = move_speed;
 		direction = move_direction;
+		var _dash_direction = noone;
 		
 		#region Movement.
 			
@@ -12,34 +13,42 @@ if (!global.pause) {
 				var _vertical_axis = gamepad_axis_value(global.gamepad, gp_axislv);
 	
 				if (joystick_deadzone_check(_horizontal_axis, _vertical_axis, joy_deadzone)) {
-					var _joystick_direction = point_direction(0, 0, _horizontal_axis, _vertical_axis);
+					_dash_direction = point_direction(0, 0, _horizontal_axis, _vertical_axis);
 					
-					motion_add(_joystick_direction, move_acceleration*delta_time*ms_to_s_60);
+					motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
 				}
 			} else {
-				if (input_keyboard_up() && !input_keyboard_left() && !input_keyboard_right()) {
+				if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(90, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 90;
 				}
-				if (input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
+				if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(270, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 270;
 				}
-				if (input_keyboard_left() && !input_keyboard_up() && !input_keyboard_down()) {
+				if (!input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(180, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 180;
 				}
-				if (input_keyboard_right() && !input_keyboard_up() && !input_keyboard_down()) {
+				if (!input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
 					motion_add(0, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 0;
 				}
-				if (input_keyboard_left() && input_keyboard_up()) {
+				if (input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(135, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 135;
 				}
-				if (input_keyboard_left() && input_keyboard_down()) {
+				if (!input_keyboard_up() && input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
 					motion_add(225, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 225;
 				}
-				if (input_keyboard_right() && input_keyboard_up()) {
+				if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
 					motion_add(45, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 45;
 				}
-				if (input_keyboard_right() && input_keyboard_down()) {
+				if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
 					motion_add(315, move_acceleration*delta_time*ms_to_s_60);
+					_dash_direction = 315;
 				}
 			}
 			
@@ -60,33 +69,46 @@ if (!global.pause) {
 			}
 			
 		#endregion
-		#region Dodge.
+		#region Dash.
 			
-			/*if (input_keyboard_up()) {
-				if (dodge_direction == 90)
-			}
+			var _can_dash = false;
 			
-			if (!is_meleeing && input_keyboard_sprint_released() && current_dash_time <= dash_time) {
-				if (stamina >= dodge_stamina) {
-					stamina -= dodge_stamina;
-					is_dodging = true;
-					speed = dodge_speed;
+			if (global.double_tap) {
+				if (input_keyboard_dash_pressed() || input_gamepad_dash_pressed()) {
+					double_tap_timer++;
+					double_tap_interval = 0;
 				} else {
-					
+					double_tap_interval++;
+				}
+				if (!is_dashing && double_tap_interval >= 30) {
+					double_tap_timer = 0;
+					double_tap_interval = 0;
+				}
+				if (double_tap_timer >= 2 && (input_keyboard_dash() || input_gamepad_dash())) {
+					double_tap_timer = 0;
+					double_tap_interval = 0;
+					_can_dash = true;
+				}
+			} else if (input_keyboard_dash() || input_gamepad_dash()) {
+				_can_dash = true;
+			}
+			if (_can_dash && _dash_direction != noone && stamina >= dash_stamina) {
+				is_dashing = true;
+				stamina -= dash_stamina;
+				speed = dash_speed;
+				direction = _dash_direction;
+			}
+			if (is_dashing) {
+				current_dash_time += delta_time;
+				if (current_dash_time >= dash_duration) {
+					is_dashing = false;
+					current_dash_time = 0;
 				}
 			}
-			
-			if (is_dodging) {
-				current_dodge_time += delta_time;
-				if (current_dodge_time >= dodge_time) {
-					current_dodge_time = 0;
-					is_dodging = false;
-				}
-			}*/
 			
 		#endregion
 		// Aim.
-		if (!is_sprinting && !is_meleeing && input_key_aim()) {
+		if (!is_sprinting && !is_meleeing && input_keyboard_aim()) {
 			is_aiming = true;
 		} else {
 			is_aiming = false;
@@ -99,34 +121,21 @@ if (!global.pause) {
 		
 		#region Speed.
 		
-			var _speed_vector = 1;
-			/*
-			if (_gamepad != noone) {
-		
+			if (!is_sprinting && speed > walk_speed_max) {
+				speed -= min(move_acceleration, speed-walk_speed_max)*delta_time*ms_to_s_60;
 			}
-			*/
-		
-			var _move_speed_max = move_speed_max*_speed_vector;
-		
-			if (!is_sprinting && speed > _move_speed_max) {
-				speed -= min(move_acceleration, speed-_move_speed_max)*delta_time*ms_to_s_60;
+			if (is_sprinting && speed > sprint_speed_max) {
+				speed -= min(move_acceleration, speed-sprint_speed_max)*delta_time*ms_to_s_60;
 			}
-			var _sprint_speed_max = sprint_speed_max*_speed_vector;
-		
-			if (is_sprinting && speed > _sprint_speed_max) {
-				speed -= min(move_acceleration, speed-_sprint_speed_max)*delta_time*ms_to_s_60;
-			}
-			var _aiming_speed_max = aiming_speed_max*_speed_vector;
-			
-			if (is_aiming && speed > _aiming_speed_max) {
-				speed -= min(move_acceleration, speed-_aiming_speed_max)*delta_time*ms_to_s_60;
+			if (is_aiming && speed > aiming_speed_max) {
+				speed -= min(move_acceleration, speed-aiming_speed_max)*delta_time*ms_to_s_60;
 			}
 			
 		#endregion
 		#region Friction.
 		
-			if (is_dodging) {
-				motion_add(direction-180, min(speed, dodge_friction*delta_time*ms_to_s_60));
+			if (is_dashing) {
+				motion_add(direction-180, min(speed, dash_friction*delta_time*ms_to_s_60));
 			} else {
 				motion_add(direction-180, min(speed, move_friction*delta_time*ms_to_s_60));
 			}
@@ -166,6 +175,18 @@ if (!global.pause) {
 			}
 			
 		#endregion
+		#region Health.
+		
+			if (hp >= hp_max) {
+				hp = hp_max;
+			}
+		
+		#endregion
+		#region Shield.
+		
+		
+		
+		#endregion
 		#region Stamina.
 		
 			if (is_sprinting) {
@@ -174,12 +195,37 @@ if (!global.pause) {
 					stamina = 0;
 				}
 			}
-			if (!is_sprinting && !is_dodging && !is_meleeing && !is_throwing) {
+			if (!is_sprinting && !is_dashing && !is_meleeing && !is_throwing) {
 				stamina += stamina_regeneration;
 				if (stamina > stamina_max) {
 					stamina = stamina_max;
 				}
 			}
+		
+		#endregion
+		#region Animation.
+			
+			if (is_meleeing || is_throwing) {
+				play_animation(animation.melee, 0.25, an_clamp_forever, pr_high);
+			} else if (move_speed > 0) {
+				if (is_sprinting) {
+					if (current_animation != animation.sprint) {
+						create_sprint_fx(owner);
+					}
+					play_animation(animation.sprint, 0.16, an_loop, pr_low);
+				} else if (is_dashing) {
+					if (current_animation != animation.dash) {
+						create_dash_fx(owner);
+					}
+					play_animation(animation.dash, 0.16, an_loop, pr_low);
+				} else {
+					play_animation(animation.walk, 0.16, an_loop, pr_low);
+				}
+			} else {
+				play_animation(animation.idle, 0.16, an_loop, pr_low);
+			}
+			//depth = -y;
+			update_animation();
 		
 		#endregion
 		#region Footsteps.
@@ -195,32 +241,19 @@ if (!global.pause) {
 			}
 	
 		#endregion
-		#region Animation.
-			
-			if (is_meleeing || is_throwing) {
-				play_animation(animation.melee, 0.25, an_clamp_forever, pr_high);
-			} else {
-				if (move_speed > 0) {
-					if (is_sprinting) {
-						if (current_animation != animation.sprint) {
-							var _sprint_fx = instance_create_layer(x, y, "Fx", class_fx);
-							
-							_sprint_fx.sprite_index = sprite_sprint_fx;
-							_sprint_fx.image_xscale = image_xscale;
-						}
-						play_animation(animation.sprint, 0.16, an_loop, pr_low);
-					} else if (is_dodging) {
-						play_animation(animation.dash, 0.16, an_loop, pr_low);
-					} else {
-						play_animation(animation.walk, 0.16, an_loop, pr_low);
-					}
-				} else {
-					play_animation(animation.idle, 0.16, an_loop, pr_low);
-				}
-			}
-			//depth = -y;
-			update_animation();
-		
-		#endregion
 	}
+	
+	#region Dig.
+		
+		if (global.relic_detected) {
+			
+		}
+		if (is_digging && dig_depth >= dig_depth_max) {
+			is_digging = false;
+			dig_depth = 0;
+			current_dig_rate = dig_rate;
+			global.relic_detected = false;
+		}
+	
+	#endregion
 }

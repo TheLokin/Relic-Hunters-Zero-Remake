@@ -1,15 +1,21 @@
 #region Animation.
 
-	#macro ms_to_s 0.000001 //sin usar
 	#macro ms_to_s_60 0.00006
-	#macro s_to_ms 1000000 // sin usar
-	#macro s_to_ms_60 60000000 // sin usar
+	enum animation {
+		idle,
+		walk,
+		sprint,
+		dash,
+		hit,
+		melee,
+		dig,
+		death
+	}
 	#macro an_loop 0
 	#macro an_clamp 1
 	#macro an_clamp_forever 2
 	#macro pr_low 0
-	#macro pr_medium 1
-	#macro pr_high 2
+	#macro pr_high 1
 
 #endregion
 #region Resolución.

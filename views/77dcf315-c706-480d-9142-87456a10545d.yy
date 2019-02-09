@@ -7,7 +7,7 @@
         "f437a4cd-ce04-413d-a9a2-033befff190a"
     ],
     "filterType": "GMSprite",
-    "folderName": "Fx",
+    "folderName": "Effects",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

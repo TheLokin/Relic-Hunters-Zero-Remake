@@ -1,7 +1,7 @@
 /*
  *	gamepad_check(gamepad)
  *
- *	Returns true if any button on the gamepad is pressed or false otherwise.
+ *	Returns true if any button on the gamepad is currently held down or false otherwise.
  *
  *	gamepad: gamepad to check.
  *

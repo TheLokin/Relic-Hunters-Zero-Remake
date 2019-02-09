@@ -1,13 +1,13 @@
 /// @description Hud
 
-if (instance_exists(class_player)) {
+if (global.player != noone) {
 	draw_set_valign(fa_center);
 	draw_set_halign(fa_right);
 	
 	#region Health.
 		
-		var _hp = player.hp;
-		var _hp_max = player.hp_max;
+		var _hp = global.player.hp;
+		var _hp_max = global.player.hp_max;
 		var _hud_image = 0;
 		
 		if (_hp < _hp_max*0.3) {
@@ -15,7 +15,7 @@ if (instance_exists(class_player)) {
 		} else if (_hp < _hp_max*0.6) {
 			_hud_image = 1;
 		} 
-		draw_sprite(player.sprite_face, _hud_image, face_x, face_y);
+		draw_sprite(global.player.sprite_face, _hud_image, face_x, face_y);
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
         draw_rectangle(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height, false);
@@ -39,8 +39,8 @@ if (instance_exists(class_player)) {
 	#endregion
 	#region Shield.
 	
-		var _energy = player.energy;
-		var _energy_max = player.energy_max + player.overshield;
+		var _energy = global.player.energy;
+		var _energy_max = global.player.energy_max + global.player.overshield;
 		
 		draw_set_color(c_black);
 		draw_set_alpha(0.8);
@@ -55,8 +55,8 @@ if (instance_exists(class_player)) {
 	#endregion
 	#region Stamina.
 	
-		var _stamina = player.stamina;
-		var _stamina_max = player.stamina_max;
+		var _stamina = global.player.stamina;
+		var _stamina_max = global.player.stamina_max;
 		
 		draw_set_color(c_black);
 		draw_set_alpha(0.8);

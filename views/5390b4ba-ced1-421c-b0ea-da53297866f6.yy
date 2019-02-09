@@ -16,7 +16,7 @@
         "d6c63671-7dbf-42e5-be2a-8ad17976b8fb"
     ],
     "filterType": "GMSprite",
-    "folderName": "Ass",
+    "folderName": "Ace",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

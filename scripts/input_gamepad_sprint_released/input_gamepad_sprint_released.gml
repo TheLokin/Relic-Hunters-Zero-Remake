@@ -6,5 +6,5 @@
  *	Returns: Boolean.
  */
 
-return global.gamepad != noone && (gamepad_button_check_released(global.gamepad, gp_stickl) ||
-								   gamepad_button_check_released(global.gamepad, gp_face1));
+return global.gamepad != noone && (gamepad_button_check_released(global.gamepad, global.gamepad_sprint1) ||
+								   gamepad_button_check_released(global.gamepad, global.gamepad_sprint2));
