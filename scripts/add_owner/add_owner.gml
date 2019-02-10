@@ -1,18 +1,17 @@
 /*
- *	add_owner(id, owner)
+ *	add_owner(owner)
  *
- *	id: the identifier of the owner.
- *	owner: the owner to add.
+ *	Create a list for the instances binded to the owner.
+ *
+ *	owner: the identifier of the owner.
  *
  *	Return: N/A.
  */
 
 #region Parameters.
 
-	var _id = argument0;
-	var _owner = argument1;
+	var _owner = argument0;
 
 #endregion
 
-ds_map_add(controller_game.map_owners, _id, _owner);
-_owner.owner = _id;
+ds_map_add(controller_game.map_owners, _owner, ds_list_create());

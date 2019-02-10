@@ -2,7 +2,7 @@
 
 #region Information.
 	
-	owner = noone;		// The owner who perform the dash.
+	owner = noone;		// The owner that perform the dash.
 
 #endregion
 #region Animation.

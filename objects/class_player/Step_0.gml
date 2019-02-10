@@ -210,12 +210,12 @@ if (!global.pause) {
 			} else if (move_speed > 0) {
 				if (is_sprinting) {
 					if (current_animation != animation.sprint) {
-						create_sprint_fx(owner);
+						create_sprint_fx(id);
 					}
 					play_animation(animation.sprint, 0.16, an_loop, pr_low);
 				} else if (is_dashing) {
 					if (current_animation != animation.dash) {
-						create_dash_fx(owner);
+						create_dash_fx(id);
 					}
 					play_animation(animation.dash, 0.16, an_loop, pr_low);
 				} else {

@@ -2,15 +2,16 @@
 
 #region Information.
 	
-	owner = noone;			// The owner who performs the actions.
 	name = "NO NAME";		// Player name.
 	
 #endregion
 #region Spawn.
 
-	is_vulnerable = false;										// If the player is vulnerable.
-	invulnerable_duration = room_speed*2;						// Duration until the player is vulnerable.
-	alarm[0] = invulnerable_duration;							// Cooldown to become the player vulnerable.
+	is_vulnerable = false;																// If the player is vulnerable.
+	invulnerable_duration = room_speed*2;												// Duration until the player is vulnerable.
+	alarm[0] = invulnerable_duration;													// Cooldown to become the player vulnerable.
+	add_owner(id);																		// Create the list of instances bind to the player.
+	bind_owner(id, instance_create_layer(x, y, "interactive_over", dynamic_bar));		// Bind the dynamic bar to the player.
 
 #endregion
 #region Health.

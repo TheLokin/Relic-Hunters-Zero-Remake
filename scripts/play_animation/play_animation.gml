@@ -11,7 +11,6 @@
  *		  an_clamp_forever: plays the animation once, wait and repeat.
  *	priority: priority of the new animation.
  *			  pr_low: low priority.
- *			  pr_medium: medium priority.
  *			  pr_high: hight priority.
  *
  *	Returns: N/A.
