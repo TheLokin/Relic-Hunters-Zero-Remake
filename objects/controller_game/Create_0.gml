@@ -6,8 +6,12 @@ global.gamepad = get_gamepad_connected();
 
 global.relic_detected = true;
 
-global.double_tap = true;
+#region Game options
 
+	global.allow_double_tap = true;			// Allow double tap to perform the player dash.
+	global.allow_wheel_mouse = true;		// Allow the wheel mouse to change weapons.
+
+#endregion
 map_owners = ds_map_create();		// Map with the owners who performs the actions.
 
 global.player = noone;
@@ -24,6 +28,10 @@ global.player = noone;
 	global.keyboard_right2 = vk_right;
 	global.keyboard_sprint = vk_space;
 	global.keyboard_dash = vk_space;
+	global.keyboard_interaction = 69;
+	global.keyboard_switch = vk_tab;
+	global.keyboard_reload = 82;
+	global.keyboard_grenade = noone;
 	
 #endregion
 #region Gamepad.
@@ -31,6 +39,10 @@ global.player = noone;
 	global.gamepad_sprint1 = gp_face1;
 	global.gamepad_sprint2 = gp_stickl;
 	global.gamepad_dash = gp_face1;
+	global.gamepad_interaction = gp_face3;
+	global.gamepad_switch = gp_face4;
+	global.gamepad_reload = noone;
+	global.gamepad_grenade = noone;
 
 #endregion
 

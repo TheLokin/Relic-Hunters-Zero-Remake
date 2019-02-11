@@ -2,7 +2,7 @@
 
 #region Information.
 	
-	name = "NO NAME";		// Player name.
+	name = "unsigned";		// Player name.
 	
 #endregion
 #region Spawn.
@@ -10,8 +10,8 @@
 	is_vulnerable = false;																// If the player is vulnerable.
 	invulnerable_duration = room_speed*2;												// Duration until the player is vulnerable.
 	alarm[0] = invulnerable_duration;													// Cooldown to become the player vulnerable.
-	add_owner(id);																		// Create the list of instances bind to the player.
-	bind_owner(id, instance_create_layer(x, y, "interactive_over", dynamic_bar));		// Bind the dynamic bar to the player.
+	add_owner(id);																		// Create the list of instances linked to the player.
+	link_owner(id, instance_create_layer(x, y, "interactive_over", dynamic_bar));		// Link the dynamic bar to the player.
 
 #endregion
 #region Health.
@@ -56,19 +56,20 @@
 #endregion
 #region Walk.
 
-	walk_speed_max = 4;					// Speed when the player is walking.
-	footstep_time = room_speed*0.2;		//
-	current_footstep_time = 0;			//
+	walk_speed_max = 4;						// Speed when the player is walking.
+	walk_footstep_duration = 300000;		// Duration between footsteps in milliseconds when the player is walking.
+	current_footstep_time = 0;				// Milliseconds since the last footstep.
 
 #endregion
 #region Sprint.
 
-	is_sprinting = false;				// If the player's state is sprinting.
-	sprint_speed_max = 5.5;				// Speed when the player is sprinting.
-	can_sprint = true;					// Sprint available.
-	sprint_delay = room_speed*0.2;		// Delay between two sprints.
-	sprint_stamina = 0.3;				// Stamina cost of each sprint.
-	sprint_stamina_min = 10;			// Minimum stamina to sprint.
+	is_sprinting = false;					// If the player's state is sprinting.
+	sprint_speed_max = 5.5;					// Speed when the player is sprinting.
+	can_sprint = true;						// Sprint available.
+	sprint_delay = room_speed*0.2;			// Delay between two sprints.
+	sprint_stamina = 0.3;					// Stamina cost of each sprint.
+	sprint_stamina_min = 10;				// Minimum stamina to sprint.
+	sprint_footstep_duration = 250000;		// Duration between footsteps in milliseconds when the player is sprinting.
 
 #endregion
 #region Dash.
@@ -90,11 +91,6 @@
 	melee_hit_frame = 5;
 
 #endregion
-#region Throw grenade.
-
-	is_throwing = false;		// If the player is throwing a grenade.
-
-#endregion
 #region Dig.
 
 	is_digging = false;		// If the player's state is digging.
@@ -106,34 +102,55 @@
 	dir_color = c_magenta;
 
 #endregion
-#region Aim.
+#region Interaction.
+
+	is_interacting = false;		// If the player is interacting with something.
+	interaction = noone;
+
+#endregion
+#region Weapon.
 
 	is_aiming = false;			// If the player's state is aiming.	
 	aiming_speed_max = 3;		// Speed when the player is aiming.
+	weapon_selected = noone;		// The weapon selected by the player.
+	weapon1 = noone;				// The weapon one.
+	weapon2 = noone;				// The weapon two.
+	
+	var _gun = instance_create_layer(x, y, "interactive", gun_pistol);
+	link_owner(id, _gun);
+	_gun.is_selected = true;
+	weapon_selected = _gun;
+	weapon1 = _gun;
+
+#endregion
+#region Grenade.
+
+	is_throwing = false;		// If the player is throwing a grenade.
+	grenade_speed = 7;
 
 #endregion
 #region Animation.
 
-	sprite_face = noone;						// Sprite to show in the hud.
-	sprite_idle = noone;						// Sprite with the animation when the player is idle.
-	sprite_walk = noone;						// Sprite with the animation when the player is walking.
-	sprite_sprint = noone;						// Sprite with the animation when the player is sprinting.
-	sprite_sprint_fx = spr_player_sprint;		// Sprite with the effect when the player is sprinting.
-	sprite_dash = noone;						// Sprite with the animation when the palyer is dashing.
-	sprite_dash_fx = noone;						// Sprite with the effect when the player is dashing.
-	sprite_hit = noone;							// Sprite with the animation when the player is hit.
-	sprite_melee = noone;						// Sprite with the animation when the player is meleeing.
-	sprite_dig = noone;							// Sprite with the animation when the player is digging.
-	sprite_death = noone;						// Sprite with the animation when the player dies.
-	current_animation = animation.idle;			// Animation playing.
-	animation_index = 0;						// Frame of the animation.
-	animation_speed = 0.16;						// Speed of the animation.
-	animation_type = an_loop;					// Duration of the animation.
-	animation_priority = pr_low;				// Priority of the animation.
+	sprite_face = noone;					// Sprite to show in the hud.
+	sprite_idle = noone;					// Sprite with the animation when the player is idle.
+	sprite_walk = noone;					// Sprite with the animation when the player is walking.
+	sprite_sprint = noone;					// Sprite with the animation when the player is sprinting.
+	sprite_sprint_fx = spr_sprint;			// Sprite with the effect when the player is sprinting.
+	sprite_dash = noone;					// Sprite with the animation when the palyer is dashing.
+	sprite_dash_fx = noone;					// Sprite with the effect when the player is dashing.
+	sprite_hit = noone;						// Sprite with the animation when the player is hit.
+	sprite_melee = noone;					// Sprite with the animation when the player is meleeing.
+	sprite_dig = noone;						// Sprite with the animation when the player is digging.
+	sprite_death = noone;					// Sprite with the animation when the player dies.
+	current_animation = animation.idle;		// Animation playing.
+	animation_index = 0;					// Frame of the animation.
+	animation_speed = 0.16;					// Speed of the animation.
+	animation_type = an_loop;				// Duration of the animation.
+	animation_priority = pr_low;			// Priority of the animation.
 	
 #endregion
 #region Sound.
 
-	audio_emitter = audio_emitter_create();
+	audio_emitter = audio_emitter_create();		// Player audio emitter.
 
 #endregion

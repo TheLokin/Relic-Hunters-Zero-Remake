@@ -7,3 +7,5 @@ view_widht = camera_get_view_width(camera);															// Anchura de la cáma
 view_height = camera_get_view_height(camera);														// Altura de la cámara.
 x_to = x;																							// Posición en el eje horizontal de la cámara a la que se dirige.
 y_to = y;																							// Posición en el eje vertical de la cámara a la que se dirige.
+
+gun_range = 0;

@@ -1,4 +1,4 @@
-/// @description Acciones
+/// @description Actions
 
 switch (room) {
 	case rm_intro: case rm_menu1: case rm_menu2: case rm_menu3: case rm_menu4: case rm_menu5: case rm_menu6: case rm_menu7:

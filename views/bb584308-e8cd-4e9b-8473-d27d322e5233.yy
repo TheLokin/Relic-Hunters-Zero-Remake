@@ -6,6 +6,7 @@
     "children": [
         "736bf88e-8c5c-4ae1-93c9-1ad0c9608a57",
         "f54bb9d3-d792-46d6-9aee-df6ae6a099c8",
+        "a73faac8-1337-43eb-91b0-dd4f5b18f4e1",
         "1e32e75e-c579-4c76-86b6-885eaf3b7a31"
     ],
     "filterType": "GMScript",

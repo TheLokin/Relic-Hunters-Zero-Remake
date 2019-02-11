@@ -73,7 +73,7 @@ if (!global.pause) {
 			
 			var _can_dash = false;
 			
-			if (global.double_tap) {
+			if (global.allow_double_tap) {
 				if (input_keyboard_dash_pressed() || input_gamepad_dash_pressed()) {
 					double_tap_timer++;
 					double_tap_interval = 0;
@@ -119,6 +119,13 @@ if (!global.pause) {
 			is_melee_dashing = false;
 		}
 		
+		#region Grenade.
+		
+			if (!is_meleeing && (input_keyboard_grenade_pressed() || input_gamepad_grenade_pressed())) {
+				//is_throwing = true;
+			}
+		
+		#endregion
 		#region Speed.
 		
 			if (!is_sprinting && speed > walk_speed_max) {
@@ -177,9 +184,9 @@ if (!global.pause) {
 		#endregion
 		#region Health.
 		
-			if (hp >= hp_max) {
+			/*if (hp >= hp_max) {
 				hp = hp_max;
-			}
+			}*/
 		
 		#endregion
 		#region Shield.
@@ -203,6 +210,11 @@ if (!global.pause) {
 			}
 		
 		#endregion
+		#region Sound.
+		
+			audio_emitter_position(audio_emitter, x, y, 0);
+		
+		#endregion
 		#region Animation.
 			
 			if (is_meleeing || is_throwing) {
@@ -211,11 +223,13 @@ if (!global.pause) {
 				if (is_sprinting) {
 					if (current_animation != animation.sprint) {
 						create_sprint_fx(id);
+						audio_play(audio_emitter, false, pr_low, sfx_sprint);
 					}
 					play_animation(animation.sprint, 0.16, an_loop, pr_low);
 				} else if (is_dashing) {
 					if (current_animation != animation.dash) {
 						create_dash_fx(id);
+						audio_play(audio_emitter, false, pr_low, sfx_dash1, sfx_dash2, sfx_dash3);
 					}
 					play_animation(animation.dash, 0.16, an_loop, pr_low);
 				} else {
@@ -230,16 +244,64 @@ if (!global.pause) {
 		#endregion
 		#region Footsteps.
 			
-			if (current_animation == animation.walk || current_animation == animation.sprint) {
-				current_footstep_time += delta_time;
-				if (current_footstep_time >= footstep_time) {
-					audio_play(audio_emitter, false, 1, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4, sfx_footsteps5);
+			switch (current_animation) {
+				case animation.walk:
+					current_footstep_time += delta_time;
+					if (current_footstep_time >= walk_footstep_duration) {
+						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4, sfx_footsteps5);
+						current_footstep_time = 0;
+					}
+				break;
+				case animation.sprint:
+					current_footstep_time += delta_time;
+					if (current_footstep_time >= sprint_footstep_duration) {
+						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4, sfx_footsteps5);
+						current_footstep_time = 0;
+					}
+				break;
+				default:
 					current_footstep_time = 0;
-				}
-			} else {
-				current_footstep_time = 0;
+				break;
 			}
 	
+		#endregion
+		#region Interaction.
+		
+			if (input_keyboard_interaction() || input_gamepad_interaction()) {
+				is_interacting = true;
+			}
+			
+		
+		#endregion
+		#region Weapon.
+			
+			if (weapon2 != noone && (input_keyboard_switch_pressed() || input_gamepad_switch_pressed())) {
+				if (audio_is_playing(sfx_reload_loop1)) {
+					audio_stop_sound(sfx_reload_loop1);
+				}
+				if (audio_is_playing(sfx_reload_loop2)) {
+					audio_stop_sound(sfx_reload_loop2);
+				}
+				if (audio_is_playing(sfx_reload_loop3)) {
+					audio_stop_sound(sfx_reload_loop3);
+				}
+				if (weapon_selected == weapon1) {
+					weapon1.is_selected = false;
+					weapon2.is_selected = true;
+					weapon_selected = weapon2;
+				} else {
+					weapon2.is_selected = false;
+					weapon1.is_selected = true;
+					weapon_selected = weapon1;
+				}
+				audio_play(audio_emitter, false, pr_low, sfx_weapon_switch);
+			}
+		
+		#endregion
+		#region Reload.
+		
+		
+		
 		#endregion
 	}
 	

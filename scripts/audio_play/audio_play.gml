@@ -1,5 +1,15 @@
-/// audio_play(emitter, loop, priority, audio1, audio2, ...)
-/// Plays one of the sounds passed as parameters.
+/*
+ *	audio_play(emitter, loop, priority, sound1, sound2, ...)
+ *
+ *	Plays one of the sounds passed as parameters.
+ *
+ *	emitter: the index of the emitter to use.
+ *	loop: flags the sound as looping or not.
+ *	priority: set the channel priority for the sound.
+ *	sound: the differents sounds to choose from.
+ *
+ *	Return N/A.
+ */
 
 #region Parameters.
 
@@ -9,6 +19,4 @@
 
 #endregion
 
-var _sound = argument[irandom_range(3, argument_count-1)];
-
-audio_play_sound_on(_emitter, _sound, _loop, _priority);
+audio_play_sound_on(_emitter, argument[irandom_range(3, argument_count-1)], _loop, _priority);

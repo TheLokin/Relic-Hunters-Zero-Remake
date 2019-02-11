@@ -1,4 +1,4 @@
-/// @description Habitación
+/// @description Rooms
 
 view_enabled = true;
 view_set_visible(0, true);
