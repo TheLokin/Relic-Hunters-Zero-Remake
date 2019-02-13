@@ -4,6 +4,7 @@
 
 	owner = noone;				// The owner of the gun.
 	name = "unsigned";			// Gun name.
+	color = c_white;			// The color of the gun to show in the hud.
 	is_selected = false;		// If the owner has select the gun.
 	is_reloading = false;		// If the gun is reloading.
 

@@ -9,7 +9,7 @@ event_inherited();
 #endregion
 #region Animation.
 
-	sprite_face = spr_ace_face;				// Sprite to show in the hud.
+	sprite_face = spr_ace_face;				// Sprite about the player's health to show in the hud.
 	sprite_idle = spr_ace_idle;				// Sprite with the animation when the player is idle.
 	sprite_walk = spr_ace_walk;				// Sprite with the animation when the player is walking.
 	sprite_sprint = spr_ace_sprint;			// Sprite with the animation when the player is sprinting.

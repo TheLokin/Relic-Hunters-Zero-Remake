@@ -186,12 +186,19 @@ if (!global.pause) {
 		
 			/*if (hp >= hp_max) {
 				hp = hp_max;
-			}*/
+			}	*/
 		
 		#endregion
 		#region Shield.
-		
-		
+				
+			hp += 0.1;
+			if (hp >= hp_max) {
+				hp = hp_max;
+				energy += 0.1;
+				if (energy >= energy_max) {
+					energy = energy_max;
+				}
+			}
 		
 		#endregion
 		#region Stamina.
@@ -248,14 +255,16 @@ if (!global.pause) {
 				case animation.walk:
 					current_footstep_time += delta_time;
 					if (current_footstep_time >= walk_footstep_duration) {
-						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4, sfx_footsteps5);
+						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
+								   sfx_footsteps5);
 						current_footstep_time = 0;
 					}
 				break;
 				case animation.sprint:
 					current_footstep_time += delta_time;
 					if (current_footstep_time >= sprint_footstep_duration) {
-						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4, sfx_footsteps5);
+						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
+								   sfx_footsteps5);
 						current_footstep_time = 0;
 					}
 				break;

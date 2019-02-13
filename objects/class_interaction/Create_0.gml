@@ -1,3 +1,7 @@
 /// @description Variables
 
-action_range = 200;
+#region Information.
+
+	action_range = 200;
+
+#endregion

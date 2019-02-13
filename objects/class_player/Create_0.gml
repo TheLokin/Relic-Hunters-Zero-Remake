@@ -121,17 +121,19 @@
 	_gun.is_selected = true;
 	weapon_selected = _gun;
 	weapon1 = _gun;
+	weapon2 = _gun;
 
 #endregion
 #region Grenade.
 
 	is_throwing = false;		// If the player is throwing a grenade.
+	grenades = 2;
 	grenade_speed = 7;
 
 #endregion
 #region Animation.
 
-	sprite_face = noone;					// Sprite to show in the hud.
+	sprite_face = noone;					// Sprite about the player's health to show in the hud.
 	sprite_idle = noone;					// Sprite with the animation when the player is idle.
 	sprite_walk = noone;					// Sprite with the animation when the player is walking.
 	sprite_sprint = noone;					// Sprite with the animation when the player is sprinting.

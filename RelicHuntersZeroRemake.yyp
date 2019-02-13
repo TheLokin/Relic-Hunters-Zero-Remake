@@ -386,7 +386,7 @@
             "Key": "21227e58-79bd-4382-bc32-b748e768ae85",
             "Value": {
                 "id": "d90d5c05-cfe7-43d9-9425-86520a21771b",
-                "resourcePath": "sprites\\col_player\\col_player.yy",
+                "resourcePath": "sprites\\spr_npc\\spr_npc.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -452,14 +452,6 @@
                 "id": "9fd5a0c8-5821-40d5-ad51-4c33e9f4c454",
                 "resourcePath": "rooms\\rm_intro\\rm_intro.yy",
                 "resourceType": "GMRoom"
-            }
-        },
-        {
-            "Key": "26a1675a-6a4d-47da-a82f-04c5497bfc45",
-            "Value": {
-                "id": "efcec3f5-893a-4d77-8f0d-eabd17f6a36b",
-                "resourcePath": "scripts\\draw_bar_delayed\\draw_bar_delayed.yy",
-                "resourceType": "GMScript"
             }
         },
         {
@@ -2623,7 +2615,6 @@
         "17c06873-ff77-4830-8381-80d67bca485e",
         "ab54553d-1304-4a3f-8431-2835283dc415",
         "84a98d52-cd8a-4964-aae0-57406a497936",
-        "26a1675a-6a4d-47da-a82f-04c5497bfc45",
         "1dbd6109-a514-4d87-8f58-a286fbd3a4a0",
         "092d5634-50d3-46eb-a93b-55765370732c",
         "ec82542f-2e92-417b-b204-571df8377447",
