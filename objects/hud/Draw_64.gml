@@ -15,8 +15,8 @@ if (global.player != noone) {
 		}
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
-        draw_rectangle(health_bar_x+health_bar_border, health_bar_y+health_bar_border, health_bar_x+health_bar_width+health_bar_border,
-					   health_bar_y+health_bar_height+health_bar_border, false);
+        draw_rectangle(health_bar_x+bar_border, health_bar_y+bar_border, health_bar_x+health_bar_width+bar_border,
+					   health_bar_y+health_bar_height+bar_border, false);
 		if (health_target == global.player.hp) {
 			if (is_filling_health_bar) {
 				if (health_delayed != global.player.hp) {
@@ -53,19 +53,19 @@ if (global.player != noone) {
 		health_target = global.player.hp;
 		draw_set_color(c_white);
 		draw_set_alpha(1);
-		draw_sprite(spr_icon_health, 0, health_bar_x+health_bar_border, health_bar_y+health_bar_border);
+		draw_sprite(spr_icon_health, 0, health_bar_x+bar_border, health_bar_y+bar_border);
 		draw_text(health_text_x, health_text_y, string(round(global.player.hp)));
 	
 	#endregion
 	#region Shield.
 		
-		var _energy_max = global.player.energy + global.player.overshield;
+		var _energy_max = global.player.energy_max + global.player.overshield;
 		
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
-        draw_rectangle(shield_bar_x+shield_bar_border, shield_bar_y+shield_bar_border, shield_bar_x+shield_bar_width+shield_bar_border,
-					   shield_bar_y+shield_bar_height+shield_bar_border, false);
-		if (_energy_max > 0) {
+        draw_rectangle(shield_bar_x+bar_border, shield_bar_y+bar_border, shield_bar_x+shield_bar_width+bar_border,
+					   shield_bar_y+shield_bar_height+bar_border, false);
+		if (shield_target == global.player.energy) {
 			if (is_filling_shield_bar) {
 				if (shield_delayed != global.player.energy) {
 					shield_delayed += min(_energy_max*bar_speed, abs(shield_delayed-global.player.energy));
@@ -101,38 +101,38 @@ if (global.player != noone) {
 		shield_target = global.player.energy;
 		draw_set_color(c_white);
 		draw_set_alpha(1);
-		draw_sprite(spr_icon_shield, 0, shield_bar_x+shield_bar_border, shield_bar_y+shield_bar_border);
+		draw_sprite(spr_icon_shield, 0, shield_bar_x+bar_border, shield_bar_y+bar_border);
 		draw_text(shield_text_x, shield_text_y, string(round(global.player.energy)));
 	
 	#endregion
 	#region Stamina.
 	
-		var _stamina = global.player.stamina;
-		var _stamina_max = global.player.stamina_max;
+		var _stamina_middle = global.player.stamina_max/2;
+		var _stamina_secundary = global.player.stamina-_stamina_middle;
 		
 		draw_set_color(c_black);
 		draw_set_alpha(0.8);
-		draw_rectangle(stamina_bar_x, stamina_bar_y, stamina_bar_x+stamina_bar_width, stamina_bar_y+stamina_bar_height, false);
-		if (_stamina > _stamina_max/2) {
-			var _stamina_color = c_white;
+		draw_rectangle(stamina_bar_x+bar_border, stamina_bar_y+bar_border, stamina_bar_x+stamina_bar_width+bar_border,
+					   stamina_bar_y+stamina_bar_height+bar_border, false);
+		draw_set_alpha(1);
+		if (global.player.stamina > _stamina_middle) {
+			draw_healthbar(stamina_bar_x, stamina_bar_y, stamina_bar_x+stamina_bar_width/2-1, stamina_bar_y+stamina_bar_height,
+						   min(1, global.player.stamina/_stamina_middle)*100, c_black, c_white, c_white, 0, false, false);
 		} else {
-			var _stamina_color = c_gray;
+			draw_healthbar(stamina_bar_x, stamina_bar_y, stamina_bar_x+stamina_bar_width/2-1, stamina_bar_y+stamina_bar_height,
+						   min(1, global.player.stamina/_stamina_middle)*100, c_black, c_gray, c_gray, 0, false, false);
 		}
-		draw_healthbar(stamina_bar_x+stamina_bar_border, stamina_bar_y+stamina_bar_border, stamina_bar_x+stamina_bar_width/2-stamina_bar_border,
-					   stamina_bar_y+stamina_bar_height-stamina_bar_border, min(1, _stamina/(_stamina_max/2))*100, c_black,
-					   _stamina_color, _stamina_color, 0, false, false);
-		var _stamina_secundary = _stamina-_stamina_max/2;
-		
 		if (_stamina_secundary > 0) {
-			if (_stamina == _stamina_max) {
-				_stamina_color = c_white;
+			if (global.player.stamina == global.player.stamina_max) {
+				draw_healthbar(stamina_bar_x+stamina_bar_width/2+2, stamina_bar_y, stamina_bar_x+stamina_bar_width,
+							   stamina_bar_y+stamina_bar_height, _stamina_secundary/_stamina_middle*100, c_black, c_white,
+							   c_white, 0, false, false);
 			} else {
-				_stamina_color = c_gray;
+				draw_healthbar(stamina_bar_x+stamina_bar_width/2+2, stamina_bar_y, stamina_bar_x+stamina_bar_width,
+							   stamina_bar_y+stamina_bar_height, _stamina_secundary/_stamina_middle*100, c_black, c_gray,
+							   c_gray, 0, false, false);
 			}
-			draw_healthbar(stamina_bar_x+stamina_bar_width/2+stamina_bar_border, stamina_bar_y+stamina_bar_border,
-						   stamina_bar_x+stamina_bar_width-stamina_bar_border, stamina_bar_y+stamina_bar_height-stamina_bar_border,
-						   _stamina_secundary/(_stamina_max/2)*100, c_black, _stamina_color, _stamina_color, 0, false, false);
-		} 
+		}
 	
 	#endregion
 	#region Weapons.
@@ -142,19 +142,19 @@ if (global.player != noone) {
 		
 		if (_weapon1 != noone) {
 			if (_weapon1 == global.player.weapon_selected) {
-	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_selected_x+weapon_border, weapon_selected_y-_weapon1.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
+	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_selected_x+bar_border, weapon_selected_y-_weapon1.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
 	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_selected_x, weapon_selected_y-_weapon1.sprite_height, 2, 2, 0, _weapon1.color, 1);
 			} else {
-				draw_sprite_ext(_weapon1.sprite_index, 2, weapon_back_x+weapon_border, weapon_back_y-_weapon1.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
+				draw_sprite_ext(_weapon1.sprite_index, 2, weapon_back_x+bar_border, weapon_back_y-_weapon1.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
 	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_back_x, weapon_back_y-_weapon1.sprite_height, 2, 2, 0, _weapon1.color, 1);
 			}
         }
 		/*if (_weapon2 != noone) {
 			if (_weapon2 == global.player.weapon_selected) {
-	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_selected_x+weapon_border, weapon_selected_y-_weapon2.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
+	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_selected_x+bar_border, weapon_selected_y-_weapon2.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
 	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_selected_x, weapon_selected_y-_weapon2.sprite_height, 2, 2, 0, _weapon2.color, 1);
 			} else {
-				draw_sprite_ext(_weapon2.sprite_index, 2, weapon_back_x+weapon_border, weapon_back_y-_weapon2.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
+				draw_sprite_ext(_weapon2.sprite_index, 2, weapon_back_x+bar_border, weapon_back_y-_weapon2.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
 	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_back_x, weapon_back_y-_weapon2.sprite_height, 2, 2, 0, _weapon2.color, 1);
 			}
         }*/

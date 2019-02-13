@@ -190,15 +190,8 @@ if (!global.pause) {
 		
 		#endregion
 		#region Shield.
-				
-			hp += 0.1;
-			if (hp >= hp_max) {
-				hp = hp_max;
-				energy += 0.1;
-				if (energy >= energy_max) {
-					energy = energy_max;
-				}
-			}
+		
+		
 		
 		#endregion
 		#region Stamina.
