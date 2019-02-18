@@ -12,8 +12,6 @@ switch (object_get_parent(owner.object_index)) {
 				var _blend = c_white;
 			}
 		}
-		//if (sprite_index >= 0) {
 		draw_sprite_ext(sprite_index, 0, _gun_x, _gun_y, image_xscale, image_yscale, image_angle, _blend, 1);
-		//}
 	break;
 }

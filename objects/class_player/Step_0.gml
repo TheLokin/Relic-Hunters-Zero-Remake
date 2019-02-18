@@ -8,7 +8,7 @@ if (!global.pause) {
 		
 		#region Movement.
 			
-			if (gamepad_check(global.gamepad)) {
+			if (global.gamepad != noone) {
 				var _horizontal_axis = gamepad_axis_value(global.gamepad, gp_axislh);
 				var _vertical_axis = gamepad_axis_value(global.gamepad, gp_axislv);
 	
@@ -166,7 +166,7 @@ if (!global.pause) {
 				} else {
 					x += _target_x;
 				}
-				if (_target_x != 0) { 
+				if (global.gamepad != noone && _target_x != 0) {
 					image_xscale = sign(_target_x);
 				}
 				if (place_meeting(x, y+_target_y, class_collision)) {
@@ -182,6 +182,17 @@ if (!global.pause) {
 			}
 			
 		#endregion
+		#region Direction.
+		
+			if (global.gamepad == noone) {
+				if (x < mouse_x) {
+					image_xscale = 1;
+				} else {
+					image_xscale = -1;
+				}
+			}
+		
+		#endregion
 		#region Health.
 		
 			/*if (hp >= hp_max) {
@@ -190,8 +201,6 @@ if (!global.pause) {
 		
 		#endregion
 		#region Shield.
-		
-		
 		
 		#endregion
 		#region Stamina.

@@ -1874,7 +1874,7 @@
             "Key": "bedccbd0-76f5-48a2-997e-6a34f252cfe3",
             "Value": {
                 "id": "5bed83f0-b0c0-4393-b0b2-56801b5e8e73",
-                "resourcePath": "objects\\obj_mouse\\obj_mouse.yy",
+                "resourcePath": "objects\\crosshair\\crosshair.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -2223,6 +2223,14 @@
             }
         },
         {
+            "Key": "e6417891-6886-45ef-a842-a1c4ff7d8717",
+            "Value": {
+                "id": "967f0218-22fa-4c08-8539-7db8a6dabc34",
+                "resourcePath": "sprites\\spr_crosshair_reload\\spr_crosshair_reload.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "e71ef446-1aad-4f41-9709-d3d1fab496b8",
             "Value": {
                 "id": "5dd22dcc-2d26-4ef1-8f21-947af88f9243",
@@ -2468,14 +2476,6 @@
                 "id": "148c299f-cf97-4f34-be3f-8b6d72040356",
                 "resourcePath": "views\\f8b7a296-c627-4e7b-b501-4b49d1671d43.yy",
                 "resourceType": "GMFolder"
-            }
-        },
-        {
-            "Key": "f92bc41a-f3aa-43cf-b106-7e2bc6a20e32",
-            "Value": {
-                "id": "42fac57e-65dc-48ad-a2f3-378d45d92016",
-                "resourcePath": "objects\\controller_mouse\\controller_mouse.yy",
-                "resourceType": "GMObject"
             }
         },
         {

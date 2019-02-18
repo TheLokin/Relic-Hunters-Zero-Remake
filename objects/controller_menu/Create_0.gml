@@ -6,7 +6,7 @@
 
 	#region Ratón.
 		
-		mouse = instance_create_layer(0, 0, "mouse_layer", obj_mouse);		// Ratón.
+		mouse = instance_create_layer(0, 0, "crosshair", crosshair);		// Ratón.
 		old_mouse_x = mouse_x;												// Última posición en el eje horizontal del ratón.
 		old_mouse_y = mouse_y;												// Última posición en el eje vertical del ratón.
 

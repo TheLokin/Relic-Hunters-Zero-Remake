@@ -17,6 +17,12 @@
 	recoil_return = 1.25;
 
 #endregion
+#region Reload.
+
+	current_reload_time = 0;
+	reload_time = 60000;
+
+#endregion
 #region Sound.
 
 

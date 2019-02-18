@@ -114,9 +114,9 @@ for (var _gamepad = 0; _gamepad < gamepad_get_device_count(); _gamepad++) {
 				break;
 			}
 		}
-		if (_gamepad_connected == noone) {
+		/*if (_gamepad_connected == noone) {
 			_gamepad_connected = _gamepad;
-		}
+		}*/
 	}
 }
 

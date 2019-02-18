@@ -15,18 +15,19 @@ if (global.player != noone) {
 		}
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
-        draw_rectangle(health_bar_x+bar_border, health_bar_y+bar_border, health_bar_x+health_bar_width+bar_border,
-					   health_bar_y+health_bar_height+bar_border, false);
+        draw_rectangle(health_bar_x+health_bar_border, health_bar_y+health_bar_border,
+					   health_bar_x+health_bar_width+health_bar_border,
+					   health_bar_y+health_bar_height+health_bar_border, false);
 		if (health_target == global.player.hp) {
 			if (is_filling_health_bar) {
 				if (health_delayed != global.player.hp) {
-					health_delayed += min(global.player.hp_max*bar_speed, abs(health_delayed-global.player.hp));
+					health_delayed += min(global.player.hp_max*health_bar_speed, abs(health_delayed-global.player.hp));
 				} else {
 					is_filling_health_bar = false;
 				}
 			} else {
 				current_health_bar_time += delta_time;
-				if (current_health_bar_time >= bar_duration) {
+				if (current_health_bar_time >= health_bar_duration) {
 					is_filling_health_bar = true;
 					current_health_bar_time = 0;
 				}
@@ -53,7 +54,7 @@ if (global.player != noone) {
 		health_target = global.player.hp;
 		draw_set_color(c_white);
 		draw_set_alpha(1);
-		draw_sprite(spr_icon_health, 0, health_bar_x+bar_border, health_bar_y+bar_border);
+		draw_sprite(spr_icon_health, 0, health_bar_x+health_bar_border, health_bar_y+health_bar_border);
 		draw_text(health_text_x, health_text_y, string(round(global.player.hp)));
 	
 	#endregion
@@ -63,18 +64,19 @@ if (global.player != noone) {
 		
 		draw_set_color(c_black);
         draw_set_alpha(0.8);
-        draw_rectangle(shield_bar_x+bar_border, shield_bar_y+bar_border, shield_bar_x+shield_bar_width+bar_border,
-					   shield_bar_y+shield_bar_height+bar_border, false);
+        draw_rectangle(shield_bar_x+shield_bar_border, shield_bar_y+shield_bar_border,
+					   shield_bar_x+shield_bar_width+shield_bar_border,
+					   shield_bar_y+shield_bar_height+shield_bar_border, false);
 		if (shield_target == global.player.energy) {
 			if (is_filling_shield_bar) {
 				if (shield_delayed != global.player.energy) {
-					shield_delayed += min(_energy_max*bar_speed, abs(shield_delayed-global.player.energy));
+					shield_delayed += min(_energy_max*shield_bar_speed, abs(shield_delayed-global.player.energy));
 				} else {
 					is_filling_shield_bar = false;
 				}
 			} else {
 				current_shield_bar_time += delta_time;
-				if (current_shield_bar_time >= bar_duration) {
+				if (current_shield_bar_time >= shield_bar_duration) {
 					is_filling_shield_bar = true;
 					current_shield_bar_time = 0;
 				}
@@ -101,7 +103,7 @@ if (global.player != noone) {
 		shield_target = global.player.energy;
 		draw_set_color(c_white);
 		draw_set_alpha(1);
-		draw_sprite(spr_icon_shield, 0, shield_bar_x+bar_border, shield_bar_y+bar_border);
+		draw_sprite(spr_icon_shield, 0, shield_bar_x+shield_bar_border, shield_bar_y+shield_bar_border);
 		draw_text(shield_text_x, shield_text_y, string(round(global.player.energy)));
 	
 	#endregion
@@ -112,8 +114,9 @@ if (global.player != noone) {
 		
 		draw_set_color(c_black);
 		draw_set_alpha(0.8);
-		draw_rectangle(stamina_bar_x+bar_border, stamina_bar_y+bar_border, stamina_bar_x+stamina_bar_width+bar_border,
-					   stamina_bar_y+stamina_bar_height+bar_border, false);
+		draw_rectangle(stamina_bar_x+stamina_bar_border, stamina_bar_y+stamina_bar_border,
+					   stamina_bar_x+stamina_bar_width+stamina_bar_border,
+					   stamina_bar_y+stamina_bar_height+stamina_bar_border, false);
 		draw_set_alpha(1);
 		if (global.player.stamina > _stamina_middle) {
 			draw_healthbar(stamina_bar_x, stamina_bar_y, stamina_bar_x+stamina_bar_width/2-1, stamina_bar_y+stamina_bar_height,
@@ -137,28 +140,28 @@ if (global.player != noone) {
 	#endregion
 	#region Weapons.
 		
-		var _weapon1 = global.player.weapon1;
-		var _weapon2 = global.player.weapon2;
-		
-		if (_weapon1 != noone) {
-			if (_weapon1 == global.player.weapon_selected) {
-	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_selected_x+bar_border, weapon_selected_y-_weapon1.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
-	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_selected_x, weapon_selected_y-_weapon1.sprite_height, 2, 2, 0, _weapon1.color, 1);
+		if (global.player.weapon1 != noone) {
+			if (global.player.weapon1 == global.player.weapon_selected) {
+	            draw_sprite_ext(global.player.weapon1.sprite_index, 2, weapon_selected_x+weapon_bar_border,
+								weapon_selected_y+weapon_bar_border, 2, 2, 0, c_black, 0.8);
+	            draw_sprite_ext(global.player.weapon1.sprite_index, 2, weapon_selected_x,
+								weapon_selected_y, 2, 2, 0, global.player.weapon1.color, 1);
 			} else {
-				draw_sprite_ext(_weapon1.sprite_index, 2, weapon_back_x+bar_border, weapon_back_y-_weapon1.sprite_height+weapon_border, 2, 2, 0, c_black, 0.8);
-	            draw_sprite_ext(_weapon1.sprite_index, 2, weapon_back_x, weapon_back_y-_weapon1.sprite_height, 2, 2, 0, _weapon1.color, 1);
+				draw_sprite_ext(global.player.weapon1.sprite_index, 2, weapon_back_x,
+								weapon_back_y, 2, 2, 0, global.player.weapon1.color, 0.8);
 			}
         }
-		/*if (_weapon2 != noone) {
-			if (_weapon2 == global.player.weapon_selected) {
-	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_selected_x+bar_border, weapon_selected_y-_weapon2.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
-	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_selected_x, weapon_selected_y-_weapon2.sprite_height, 2, 2, 0, _weapon2.color, 1);
+		if (global.player.weapon2 != noone) {
+			if (global.player.weapon2 == global.player.weapon_selected) {
+	            draw_sprite_ext(global.player.weapon2.sprite_index, 2, weapon_selected_x+weapon_bar_border,
+								weapon_selected_y+weapon_bar_border, 2, 2, 0, c_black, 0.8);
+	            draw_sprite_ext(global.player.weapon2.sprite_index, 2, weapon_selected_x,
+								weapon_selected_y, 2, 2, 0, global.player.weapon2.color, 1);
 			} else {
-				draw_sprite_ext(_weapon2.sprite_index, 2, weapon_back_x+bar_border, weapon_back_y-_weapon2.sprite_height+bar_border, 2, 2, 0, c_black, 0.8);
-	            draw_sprite_ext(_weapon2.sprite_index, 2, weapon_back_x, weapon_back_y-_weapon2.sprite_height, 2, 2, 0, _weapon2.color, 1);
+	            draw_sprite_ext(global.player.weapon2.sprite_index, 2, weapon_back_x,
+								weapon_back_y, 2, 2, 0, global.player.weapon2.color, 0.8);
 			}
-        }*/
+        }
  
 	#endregion
-	draw_set_alpha(1);
 }

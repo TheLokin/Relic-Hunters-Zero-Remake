@@ -87,7 +87,7 @@
         },
         {
             "__type": "GMRInstanceLayer_Model:#YoYoStudio.MVCFormat",
-            "name": "mouse_layer",
+            "name": "crosshair",
             "id": "4f17b3fa-18ac-48ce-8155-596626e82744",
             "depth": 300,
             "grid_x": 8,

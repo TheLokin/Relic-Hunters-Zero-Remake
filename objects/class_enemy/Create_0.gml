@@ -20,7 +20,12 @@
 #endregion
 #region Energy.
 
-
+	energy_max = 100;								// Maximum energy.
+	energy = energy_max;							// Energy.
+	energy_regeneration_time = room_speed*2.5;		// Regeneration time.
+	
+	overshield = 0;				// Sobre escudo.
+	supershield = false;		// Super escudo.
 
 #endregion
 #region Movement.

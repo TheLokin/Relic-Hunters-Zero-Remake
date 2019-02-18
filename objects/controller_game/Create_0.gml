@@ -1,21 +1,23 @@
 /// @description Variables
 
+window_set_cursor(cr_none);
+
 global.debug = false;		// Modo debug.
 global.pause = false;		// Pausa.
-global.gamepad = get_gamepad_connected();
+global.gamepad = noone;
 
 global.relic_detected = true;
 
-#region Game options
+map_owners = ds_map_create();		// Map with the owners who performs the actions.
+
+global.player = noone;
+
+#region Game options.
 
 	global.allow_double_tap = true;			// Allow double tap to perform the player dash.
 	global.allow_wheel_mouse = true;		// Allow the wheel mouse to change weapons.
 
 #endregion
-map_owners = ds_map_create();		// Map with the owners who performs the actions.
-
-global.player = noone;
-
 #region Keyboard.
 
 	global.keyboard_up1 = 87;

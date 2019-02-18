@@ -116,12 +116,16 @@
 	weapon1 = noone;				// The weapon one.
 	weapon2 = noone;				// The weapon two.
 	
-	var _gun = instance_create_layer(x, y, "interactive", gun_pistol);
-	link_owner(id, _gun);
-	_gun.is_selected = true;
-	weapon_selected = _gun;
-	weapon1 = _gun;
-	weapon2 = _gun;
+	/* Pruebas */
+	var _gun1 = instance_create_layer(x, y, "interactive", gun_pistol);
+	link_owner(id, _gun1);
+	_gun1.is_selected = true;
+	weapon_selected = _gun1;
+	weapon1 = _gun1;
+	var _gun2 = instance_create_layer(x, y, "interactive", gun_pistol);
+	link_owner(id, _gun2);
+	weapon2 = _gun2;
+	/* Pruebas */
 
 #endregion
 #region Grenade.

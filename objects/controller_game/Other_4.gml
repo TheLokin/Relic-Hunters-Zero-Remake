@@ -17,5 +17,7 @@ switch (room) {
 	default:
 		global.player = instance_create_layer(224, 192, "player", player_ace);
 		instance_create_layer(0, 0, "hud", hud);
+		
+		instance_create_layer(0, 0, "crosshair", crosshair);
 	break;
 }
