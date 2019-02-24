@@ -110,21 +110,19 @@
 #endregion
 #region Weapon.
 
-	is_aiming = false;			// If the player's state is aiming.	
-	aiming_speed_max = 3;		// Speed when the player is aiming.
+	is_aiming = false;				// If the player's state is aiming.	
+	aiming_speed_max = 3;			// Speed when the player is aiming.
 	weapon_selected = noone;		// The weapon selected by the player.
 	weapon1 = noone;				// The weapon one.
 	weapon2 = noone;				// The weapon two.
 	
 	/* Pruebas */
-	var _gun1 = instance_create_layer(x, y, "interactive", gun_pistol);
-	link_owner(id, _gun1);
-	_gun1.is_selected = true;
-	weapon_selected = _gun1;
-	weapon1 = _gun1;
-	var _gun2 = instance_create_layer(x, y, "interactive", gun_pistol);
-	link_owner(id, _gun2);
-	weapon2 = _gun2;
+	weapon1 = instance_create_layer(x, y, "interactive", gun_pistol);
+	link_owner(id, weapon1);
+	weapon2 = instance_create_layer(x, y, "interactive", gun_pistol);
+	link_owner(id, weapon2);
+	weapon_selected = weapon1;
+	weapon_selected.is_selected = true;
 	/* Pruebas */
 
 #endregion
@@ -134,6 +132,13 @@
 	grenades = 2;
 	grenade_speed = 7;
 
+#endregion
+#region Crosshair.
+
+	crosshair_x = 0;				// Position on the horizontal axis of the player's crosshair.
+	crosshair_y = 0;				// Position on the vertical axis of the player's crosshair.
+	crosshair_direction = 0;		// Direction of the crosshair with the gamepad.
+	
 #endregion
 #region Animation.
 

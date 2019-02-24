@@ -3,7 +3,7 @@
  *
  *	Returns true if the button to aim with the keyboard is currently held down or false otherwise.
  *
- *	Returns: Boolean.
+ *	Returns: boolean.
  */
 
-return mouse_check_button(mb_right);
+return mouse_check_button(global.keyboard_aim);

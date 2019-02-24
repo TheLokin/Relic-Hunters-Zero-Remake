@@ -92,11 +92,15 @@ if (!global.pause) {
 			} else if (input_keyboard_dash() || input_gamepad_dash()) {
 				_can_dash = true;
 			}
-			if (_can_dash && _dash_direction != noone && stamina >= dash_stamina) {
+			if (_can_dash && stamina >= dash_stamina) {
 				is_dashing = true;
 				stamina -= dash_stamina;
 				speed = dash_speed;
-				direction = _dash_direction;
+				if (_dash_direction != noone) {
+					direction = _dash_direction;
+				} else {
+					direction = 180+point_direction(x, y, crosshair_x, crosshair_y);
+				}
 			}
 			if (is_dashing) {
 				current_dash_time += delta_time;
@@ -166,9 +170,6 @@ if (!global.pause) {
 				} else {
 					x += _target_x;
 				}
-				if (global.gamepad != noone && _target_x != 0) {
-					image_xscale = sign(_target_x);
-				}
 				if (place_meeting(x, y+_target_y, class_collision)) {
 					while (!place_meeting(x, y+sign(_target_y), class_collision)) {
 						y += sign(_target_y);
@@ -182,13 +183,61 @@ if (!global.pause) {
 			}
 			
 		#endregion
-		#region Direction.
+		#region Crosshair and orientation.
 		
-			if (global.gamepad == noone) {
-				if (x < mouse_x) {
-					image_xscale = 1;
+			if (global.gamepad != noone) {
+				var _enemy = find_enemy(weapon_selected.x, weapon_selected.y, weapon_selected.projectile_range);
+				
+				if (_enemy != noone) {
+					var _enemy_x = _enemy.bbox_left+(_enemy.bbox_right-_enemy.bbox_left)/2;
+					var _enemy_y = _enemy.bbox_top+(_enemy.bbox_bottom-_enemy.bbox_top)/2;
+					var _crosshair_distance = point_distance(weapon_selected.x, weapon_selected.y, _enemy_x, _enemy_y);
+					
+					crosshair_direction = point_direction(weapon_selected.x, weapon_selected.y, _enemy_x, _enemy_y);
 				} else {
+					var _crosshair_distance = weapon_selected.projectile_range;
+					var _crosshair_target_direction = crosshair_direction;
+					
+					if (!is_aiming) {
+						var _horizontal_axis_right = gamepad_axis_value(global.gamepad, gp_axisrh);
+						var _vertical_axis_right = gamepad_axis_value(global.gamepad, gp_axisrv);
+					
+						if (joystick_deadzone_check(_horizontal_axis_right, _vertical_axis_right, joy_deadzone)) {
+							_crosshair_target_direction = point_direction(weapon_selected.x, weapon_selected.y,
+																		  weapon_selected.x+_horizontal_axis_right,
+																		  weapon_selected.y+_vertical_axis_right);
+						} else {
+							var _horizontal_axis_left = gamepad_axis_value(global.gamepad, gp_axislh);
+							var _vertical_axis_left = gamepad_axis_value(global.gamepad, gp_axislv);
+					
+							if (joystick_deadzone_check(_horizontal_axis_left, _vertical_axis_left, joy_deadzone)) {
+								_crosshair_target_direction = point_direction(weapon_selected.x, weapon_selected.y,
+																			  weapon_selected.x+_horizontal_axis_left,
+																			  weapon_selected.y+_vertical_axis_left);
+							}
+						}
+					}
+					crosshair_direction = angle_rotate(crosshair_direction, _crosshair_target_direction, 20);
+				}
+				var _target_x = weapon_selected.x+lengthdir_x(_crosshair_distance, crosshair_direction);
+			    var _target_y = weapon_selected.y+lengthdir_y(_crosshair_distance, crosshair_direction);
+			    var _target_distance = point_distance(crosshair_x, crosshair_y, _target_x, _target_y);
+				var _target_direction = point_direction(crosshair_x, crosshair_y, _target_x, _target_y);
+			    
+				crosshair_x += lengthdir_x(_target_distance, _target_direction);
+				crosshair_y += lengthdir_y(_target_distance, _target_direction);
+				if (crosshair_direction > 90 && crosshair_direction <= 270) {
 					image_xscale = -1;
+				} else {
+					image_xscale = 1;
+				}
+			} else {
+				crosshair_x = mouse_x;
+				crosshair_y = mouse_y;
+				if (x > mouse_x) {
+					image_xscale = -1;
+				} else {
+					image_xscale = 1;
 				}
 			}
 		
@@ -281,7 +330,6 @@ if (!global.pause) {
 			if (input_keyboard_interaction() || input_gamepad_interaction()) {
 				is_interacting = true;
 			}
-			
 		
 		#endregion
 		#region Weapon.
@@ -307,11 +355,6 @@ if (!global.pause) {
 				}
 				audio_play(audio_emitter, false, pr_low, sfx_weapon_switch);
 			}
-		
-		#endregion
-		#region Reload.
-		
-		
 		
 		#endregion
 	}

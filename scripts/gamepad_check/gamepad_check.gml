@@ -5,7 +5,7 @@
  *
  *	gamepad: gamepad to check.
  *
- *	Returns: Boolean.
+ *	Returns: boolean.
  */
 
 #region Parameters.
@@ -14,7 +14,7 @@
 
 #endregion
 
-if (gamepad_is_connected(_gamepad)) {
+if (_gamepad != noone && gamepad_is_connected(_gamepad)) {
 	for (var _i = 0; _i < 20; _i++) {
 		switch (_i) {
 			case 0:

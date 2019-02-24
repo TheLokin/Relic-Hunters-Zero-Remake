@@ -3,7 +3,7 @@
  *
  *	Returns true if the button to sprint with the keyboard is released or false otherwise.
  *
- *	Returns: Boolean.
+ *	Returns: boolean.
  */
 
 return keyboard_check_released(global.keyboard_sprint);

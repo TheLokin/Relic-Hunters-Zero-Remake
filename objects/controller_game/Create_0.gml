@@ -1,21 +1,25 @@
 /// @description Variables
 
+game_set_speed(60, gamespeed_fps);
 window_set_cursor(cr_none);
 
-global.debug = false;		// Modo debug.
-global.pause = false;		// Pausa.
+gamepad = get_gamepad_connected();
+
+global.debug = true;		// Modo debug.
+global.pause = false;		// Pause.
 global.gamepad = noone;
 
 global.relic_detected = true;
 
 map_owners = ds_map_create();		// Map with the owners who performs the actions.
 
-global.player = noone;
+global.player = noone;		// Player.
 
 #region Game options.
 
 	global.allow_double_tap = true;			// Allow double tap to perform the player dash.
 	global.allow_wheel_mouse = true;		// Allow the wheel mouse to change weapons.
+	global.screen_shake_ratio = 1;
 
 #endregion
 #region Keyboard.
@@ -30,9 +34,11 @@ global.player = noone;
 	global.keyboard_right2 = vk_right;
 	global.keyboard_sprint = vk_space;
 	global.keyboard_dash = vk_space;
-	global.keyboard_interaction = 69;
-	global.keyboard_switch = vk_tab;
+	global.keyboard_shot = mb_left;
+	global.keyboard_aim = mb_right;
 	global.keyboard_reload = 82;
+	global.keyboard_switch = vk_tab;
+	global.keyboard_interaction = 69;
 	global.keyboard_grenade = noone;
 	
 #endregion
@@ -41,9 +47,9 @@ global.player = noone;
 	global.gamepad_sprint1 = gp_face1;
 	global.gamepad_sprint2 = gp_stickl;
 	global.gamepad_dash = gp_face1;
-	global.gamepad_interaction = gp_face3;
-	global.gamepad_switch = gp_face4;
 	global.gamepad_reload = noone;
+	global.gamepad_switch = gp_face4;
+	global.gamepad_interaction = gp_face3;
 	global.gamepad_grenade = noone;
 
 #endregion

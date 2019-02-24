@@ -1,5 +1,5 @@
 /*
- *	audio_play(emitter, loop, priority, sound1, sound2, ...)
+ *	audio_play(emitter, loop, priority, sound1, [sound2, sound3, ...])
  *
  *	Plays one of the sounds passed as parameters.
  *

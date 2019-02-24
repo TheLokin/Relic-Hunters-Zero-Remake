@@ -8,4 +8,21 @@ view_height = camera_get_view_height(camera);														// Altura de la cáma
 x_to = x;																							// Posición en el eje horizontal de la cámara a la que se dirige.
 y_to = y;																							// Posición en el eje vertical de la cámara a la que se dirige.
 
-gun_range = 0;
+weapon_range = 0;
+
+#region Screen shake.
+
+	shake_screen = 0;
+	shake_direction = 0;
+	shake_recovery = 4;
+	shake_max = 50;
+
+#endregion
+#region Zoom.
+
+	zoom = 1;
+	current_zoom = zoom;
+	zoom_speed_in = 0.015;
+	zoom_speed_out = 0.01;
+	
+#endregion

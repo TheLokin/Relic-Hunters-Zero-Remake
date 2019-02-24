@@ -7,7 +7,7 @@
  *	vertical_axis: vertical axis of the joystick.
  *	deadzone: deadzone of the joystick, from 0 to 1.
  *
- *	Returns: Boolean.
+ *	Returns: boolean.
  */
 
 #region Parameters.
