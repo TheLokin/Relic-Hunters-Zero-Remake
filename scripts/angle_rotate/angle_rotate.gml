@@ -19,11 +19,15 @@
 #endregion
 
 var _diff = angle_cycle(_target-_angle, -180, 180);
+var _result = _target;
 
 if (_diff < -_speed) {
-	return _angle-_speed;
+	_result = _angle-_speed;
 } else if (_diff > _speed) {
-	return _angle+_speed;
+	_result = _angle+_speed;
+}
+if (_result < 0) {
+	return _result+360;
 } else {
-	return _target;
+	return _result;
 }

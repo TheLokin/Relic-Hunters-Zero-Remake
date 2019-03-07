@@ -13,9 +13,8 @@
 	}
 	#macro an_loop 0
 	#macro an_clamp 1
-	#macro an_clamp_forever 2
 	#macro pr_low 0
-	#macro pr_high 1
+	#macro pr_hight 1
 
 #endregion
 #region Resolución.
@@ -48,10 +47,10 @@
 #region Colors.
 
 	#macro c_magenta make_color_rgb(239, 4, 68)
-	#macro c_health make_color_rgb(184, 49, 35)
-	#macro c_shield make_color_rgb(50, 133, 158)
-	#macro c_weapon_light make_color_rgb(99, 210, 0)
-	#macro c_weapon_medium make_color_rgb(178, 0, 65)
-	#macro c_weapon_heavy make_color_rgb(0, 88, 178)
+	#macro c_firebrick make_color_rgb(184, 49, 35)
+	#macro c_cadetblue make_color_rgb(50, 133, 158)
+	#macro c_limegreen make_color_rgb(99, 210, 0)
+	#macro c_crimson make_color_rgb(178, 0, 65)
+	#macro c_cobalt make_color_rgb(0, 88, 178)
 
 #endregion

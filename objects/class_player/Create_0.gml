@@ -46,6 +46,13 @@
 	stamina_regeneration_relic = stamina_regeneration*2;		// Tiempo de regeneración con reliquias. no vi que se usase
 	
 #endregion
+#region Crosshair.
+
+	crosshair_x = 0;				// Position on the horizontal axis of the player's crosshair.
+	crosshair_y = 0;				// Position on the vertical axis of the player's crosshair.
+	crosshair_direction = 0;		// Direction of the crosshair with the gamepad.
+	
+#endregion
 #region Movement.
 
 	move_acceleration = 1.5;		// Player acceleration.
@@ -70,6 +77,8 @@
 	sprint_stamina = 0.3;					// Stamina cost of each sprint.
 	sprint_stamina_min = 10;				// Minimum stamina to sprint.
 	sprint_footstep_duration = 250000;		// Duration between footsteps in milliseconds when the player is sprinting.
+	sprint_duration = 600000;				// Duration between sprint effect in milliseconds when the player is sprinting.
+	current_sprint_time = 0;				// Milliseconds since the last sprint effect.
 
 #endregion
 #region Dash.
@@ -99,7 +108,6 @@
 	dig_depth_max = 42; //Esto igual es la mitad
 	dig_rate = room_speed*0.3;
 	current_dig_rate = dig_rate;
-	dir_color = c_magenta;
 
 #endregion
 #region Interaction.
@@ -132,13 +140,6 @@
 	grenades = 2;
 	grenade_speed = 7;
 
-#endregion
-#region Crosshair.
-
-	crosshair_x = 0;				// Position on the horizontal axis of the player's crosshair.
-	crosshair_y = 0;				// Position on the vertical axis of the player's crosshair.
-	crosshair_direction = 0;		// Direction of the crosshair with the gamepad.
-	
 #endregion
 #region Animation.
 

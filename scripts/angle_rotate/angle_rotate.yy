@@ -1,5 +1,5 @@
 {
-    "id": "22be43fc-5240-4b75-831e-fadd60954ea4",
+    "id": "19ffc54a-79d5-4b6b-a447-ef834fa16929",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "angle_rotate",

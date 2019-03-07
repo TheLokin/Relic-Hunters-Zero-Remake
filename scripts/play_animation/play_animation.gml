@@ -8,7 +8,6 @@
  *	type: determines the duration of the animation.
  *		  an_loop: plays the animation in a constant loop.
  *		  an_clamp: plays the animation once and then stops.
- *		  an_clamp_forever: plays the animation once, wait and repeat.
  *	priority: priority of the new animation.
  *			  pr_low: low priority.
  *			  pr_high: hight priority.

@@ -1,4 +1,4 @@
-/// @description Control del juego
+/// @description Actions
 
 if (keyboard_check(vk_anykey)) {
 	global.gamepad = noone;

@@ -21,8 +21,8 @@
 var _enemy = instance_nearest(_x, _y, class_enemy);
 
 if (_enemy != noone) {
-	var _enemy_x = _enemy.bbox_left+(_enemy.bbox_right-_enemy.bbox_left)/2;
-	var _enemy_y = _enemy.bbox_top+(_enemy.bbox_bottom-_enemy.bbox_top)/2;
+	var _enemy_x = object_get_xcenter(_enemy);
+	var _enemy_y = object_get_ycenter(_enemy);
 	
 	if (!collision_line(_x, _y, _enemy_x, _enemy_y, class_collision, false, true) &&
 		point_distance(_x, _y, _enemy_x, _enemy_y) < _range) {

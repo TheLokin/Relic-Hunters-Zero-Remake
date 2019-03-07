@@ -1,7 +1,7 @@
 /*
  *	create_sprint_fx(owner)
  *
- *	Plays the sprinting effect for the owner.
+ *	Plays the sprint effect for the owner.
  *
  *	owner: the owner that perform the sprint.
  *

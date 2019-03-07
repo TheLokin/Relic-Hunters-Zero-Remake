@@ -44,12 +44,12 @@ if (global.player != noone) {
 			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height,
 						   health_delayed/global.player.hp_max*100, c_black, c_white, c_white, 0, false, false);
 			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height,
-						   global.player.hp/global.player.hp_max*100, c_black, c_health, c_health, 0, false, false);
+						   global.player.hp/global.player.hp_max*100, c_black, c_firebrick, c_firebrick, 0, false, false);
 		} else {
 			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height,
 						   global.player.hp/global.player.hp_max*100, c_black, c_white, c_white, 0, false, false);
 			draw_healthbar(health_bar_x, health_bar_y, health_bar_x+health_bar_width, health_bar_y+health_bar_height,
-						   health_delayed/global.player.hp_max*100, c_black, c_health, c_health, 0, false, false);
+						   health_delayed/global.player.hp_max*100, c_black, c_firebrick, c_firebrick, 0, false, false);
 		}
 		health_target = global.player.hp;
 		draw_set_color(c_white);
@@ -93,12 +93,12 @@ if (global.player != noone) {
 			draw_healthbar(shield_bar_x, shield_bar_y, shield_bar_x+shield_bar_width, shield_bar_y+shield_bar_height,
 						   shield_delayed/_energy_max*100, c_black, c_white, c_white, 0, false, false);
 			draw_healthbar(shield_bar_x, shield_bar_y, shield_bar_x+shield_bar_width, shield_bar_y+shield_bar_height,
-						   global.player.energy/_energy_max*100, c_black, c_shield, c_shield, 0, false, false);
+						   global.player.energy/_energy_max*100, c_black, c_cadetblue, c_cadetblue, 0, false, false);
 		} else {
 			draw_healthbar(shield_bar_x, shield_bar_y, shield_bar_x+shield_bar_width, shield_bar_y+shield_bar_height,
 						   global.player.energy/_energy_max*100, c_black, c_white, c_white, 0, false, false);
 			draw_healthbar(shield_bar_x, shield_bar_y, shield_bar_x+shield_bar_width, shield_bar_y+shield_bar_height,
-						   shield_delayed/_energy_max*100, c_black, c_shield, c_shield, 0, false, false);
+						   shield_delayed/_energy_max*100, c_black, c_cadetblue, c_cadetblue, 0, false, false);
 		}
 		shield_target = global.player.energy;
 		draw_set_color(c_white);

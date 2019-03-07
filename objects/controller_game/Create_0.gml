@@ -1,8 +1,5 @@
 /// @description Variables
 
-game_set_speed(60, gamespeed_fps);
-window_set_cursor(cr_none);
-
 gamepad = get_gamepad_connected();
 
 global.debug = true;		// Modo debug.
@@ -10,6 +7,7 @@ global.pause = false;		// Pause.
 global.gamepad = noone;
 
 global.relic_detected = true;
+global.dirt_color = c_magenta;
 
 map_owners = ds_map_create();		// Map with the owners who performs the actions.
 
@@ -47,6 +45,7 @@ global.player = noone;		// Player.
 	global.gamepad_sprint1 = gp_face1;
 	global.gamepad_sprint2 = gp_stickl;
 	global.gamepad_dash = gp_face1;
+	global.gamepad_shot = gp_shoulderrb;
 	global.gamepad_reload = noone;
 	global.gamepad_switch = gp_face4;
 	global.gamepad_interaction = gp_face3;

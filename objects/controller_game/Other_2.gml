@@ -1,4 +1,8 @@
-/// @description Arranque
+/// @description Start
+
+game_set_speed(60, gamespeed_fps);
+window_set_cursor(cr_none);
+randomize();
 
 resolution[0, 0] = 640;		resolution[0, 1] = 360;
 resolution[1, 0] = 1024;	resolution[1, 1] = 576;

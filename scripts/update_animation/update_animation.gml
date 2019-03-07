@@ -46,6 +46,7 @@ animation_index += animation_speed;
 		case an_loop:
 	        if (animation_index >= _frames) {
 				animation_index = 0;
+				animation_priority = pr_low;
 			}
 	    break;
 	    case an_clamp:
@@ -53,11 +54,6 @@ animation_index += animation_speed;
 	        if (animation_index >= _frames) {
 	            animation_index = _frames;
 	            animation_priority = pr_low;
-	        }
-	    break;
-	    case an_clamp_forever:
-	        if (animation_index >= _frames) {
-	            animation_index = _frames;
 	        }
 	    break;
 	}

@@ -38,12 +38,12 @@ if (alpha > 0) {
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, shield_delayed/_energy_max*100,
 								c_black, c_white, c_white, 0, false, false);
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, owner.energy/_energy_max*100,
-								c_black, c_shield, c_shield, 0, false, false);
+								c_black, c_cadetblue, c_cadetblue, 0, false, false);
 			} else {
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, owner.energy/_energy_max*100,
 								c_black, c_white, c_white, 0, false, false);
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, shield_delayed/_energy_max*100,
-								c_black, c_shield, c_shield, 0, false, false);
+								c_black, c_cadetblue, c_cadetblue, 0, false, false);
 			}
 			shield_target = owner.energy;
 		}
@@ -78,12 +78,12 @@ if (alpha > 0) {
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, health_delayed/owner.hp_max*100,
 							   c_black, c_white, c_white, 0, false, false);
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, owner.hp/owner.hp_max*100,
-							   c_black, c_health, c_health, 0, false, false);
+							   c_black, c_firebrick, c_firebrick, 0, false, false);
 			} else {
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, owner.hp/owner.hp_max*100,
 							   c_black, c_white, c_white, 0, false, false);
 				draw_healthbar(_bar_x, _bar_y, _bar_x+bar_width, _bar_y+bar_height, health_delayed/owner.hp_max*100,
-							   c_black, c_health, c_health, 0, false, false);
+							   c_black, c_firebrick, c_firebrick, 0, false, false);
 			}
 			health_target = owner.hp;
 		}

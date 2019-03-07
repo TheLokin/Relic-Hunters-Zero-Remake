@@ -189,8 +189,8 @@ if (!global.pause) {
 				var _enemy = find_enemy(weapon_selected.x, weapon_selected.y, weapon_selected.projectile_range);
 				
 				if (_enemy != noone) {
-					var _enemy_x = _enemy.bbox_left+(_enemy.bbox_right-_enemy.bbox_left)/2;
-					var _enemy_y = _enemy.bbox_top+(_enemy.bbox_bottom-_enemy.bbox_top)/2;
+					var _enemy_x = object_get_xcenter(_enemy);
+					var _enemy_y = object_get_ycenter(_enemy);
 					var _crosshair_distance = point_distance(weapon_selected.x, weapon_selected.y, _enemy_x, _enemy_y);
 					
 					crosshair_direction = point_direction(weapon_selected.x, weapon_selected.y, _enemy_x, _enemy_y);
@@ -268,107 +268,117 @@ if (!global.pause) {
 			}
 		
 		#endregion
-		#region Sound.
-		
-			audio_emitter_position(audio_emitter, x, y, 0);
-		
-		#endregion
-		#region Animation.
-			
-			if (is_meleeing || is_throwing) {
-				play_animation(animation.melee, 0.25, an_clamp_forever, pr_high);
-			} else if (move_speed > 0) {
-				if (is_sprinting) {
-					if (current_animation != animation.sprint) {
-						create_sprint_fx(id);
-						audio_play(audio_emitter, false, pr_low, sfx_sprint);
-					}
-					play_animation(animation.sprint, 0.16, an_loop, pr_low);
-				} else if (is_dashing) {
-					if (current_animation != animation.dash) {
-						create_dash_fx(id);
-						audio_play(audio_emitter, false, pr_low, sfx_dash1, sfx_dash2, sfx_dash3);
-					}
-					play_animation(animation.dash, 0.16, an_loop, pr_low);
-				} else {
-					play_animation(animation.walk, 0.16, an_loop, pr_low);
-				}
-			} else {
-				play_animation(animation.idle, 0.16, an_loop, pr_low);
-			}
-			//depth = -y;
-			update_animation();
-		
-		#endregion
-		#region Footsteps.
-			
-			switch (current_animation) {
-				case animation.walk:
-					current_footstep_time += delta_time;
-					if (current_footstep_time >= walk_footstep_duration) {
-						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
-								   sfx_footsteps5);
-						current_footstep_time = 0;
-					}
-				break;
-				case animation.sprint:
-					current_footstep_time += delta_time;
-					if (current_footstep_time >= sprint_footstep_duration) {
-						audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
-								   sfx_footsteps5);
-						current_footstep_time = 0;
-					}
-				break;
-				default:
-					current_footstep_time = 0;
-				break;
-			}
-	
-		#endregion
-		#region Interaction.
-		
-			if (input_keyboard_interaction() || input_gamepad_interaction()) {
-				is_interacting = true;
-			}
-		
-		#endregion
-		#region Weapon.
-			
-			if (weapon2 != noone && (input_keyboard_switch_pressed() || input_gamepad_switch_pressed())) {
-				if (audio_is_playing(sfx_reload_loop1)) {
-					audio_stop_sound(sfx_reload_loop1);
-				}
-				if (audio_is_playing(sfx_reload_loop2)) {
-					audio_stop_sound(sfx_reload_loop2);
-				}
-				if (audio_is_playing(sfx_reload_loop3)) {
-					audio_stop_sound(sfx_reload_loop3);
-				}
-				if (weapon_selected == weapon1) {
-					weapon1.is_selected = false;
-					weapon2.is_selected = true;
-					weapon_selected = weapon2;
-				} else {
-					weapon2.is_selected = false;
-					weapon1.is_selected = true;
-					weapon_selected = weapon1;
-				}
-				audio_play(audio_emitter, false, pr_low, sfx_weapon_switch);
-			}
-		
-		#endregion
 	}
-	
-	#region Dig.
+	#region Interaction.
 		
-		if (global.relic_detected) {
-			
+		if (input_keyboard_interaction_pressed() || input_gamepad_interaction_pressed()) {
+			is_interacting = true;
 		}
-		if (is_digging && dig_depth >= dig_depth_max) {
-			is_digging = false;
-			dig_depth = 0;
-			current_dig_rate = dig_rate;
-			global.relic_detected = false;
+		
+	#endregion
+	#region Weapon.
+			
+		if (weapon2 != noone && (input_keyboard_switch_pressed() || input_gamepad_switch_pressed())) {
+			if (audio_is_playing(sfx_reload_loop1)) {
+				audio_stop_sound(sfx_reload_loop1);
+			}
+			if (audio_is_playing(sfx_reload_loop2)) {
+				audio_stop_sound(sfx_reload_loop2);
+			}
+			if (audio_is_playing(sfx_reload_loop3)) {
+				audio_stop_sound(sfx_reload_loop3);
+			}
+			if (weapon_selected == weapon1) {
+				weapon1.is_selected = false;
+				weapon2.is_selected = true;
+				weapon_selected = weapon2;
+			} else {
+				weapon2.is_selected = false;
+				weapon1.is_selected = true;
+				weapon_selected = weapon1;
+			}
+			audio_play(audio_emitter, false, pr_low, sfx_weapon_switch);
+		}
+		
+	#endregion
+	#region Dig.
+	
+		if (global.relic_detected) {
+			if (!is_dashing && current_animation != animation.dig && (input_keyboard_interaction_pressed() ||
+				input_gamepad_interaction_pressed())) {
+				play_animation(animation.dig, 0.12, an_clamp, pr_hight);
+				if (place_meeting(x, y, dig_spot)) {
+					is_digging = true;
+				} else {
+					create_detector_fx(id);
+				}
+			}
+			if (is_digging && dig_depth >= dig_depth_max) {
+				is_digging = false;
+				dig_depth = 0;
+				current_dig_rate = dig_rate;
+				global.relic_detected = false;
+			}
+		}
+	
+	#endregion
+	#region Animation.
+		
+		if (is_meleeing || is_throwing) {
+			play_animation(animation.melee, 0.25, an_clamp, pr_hight);
+		} else if (move_speed > 0) {
+			if (is_sprinting) {
+				play_animation(animation.sprint, 0.16, an_loop, pr_low);
+			} else if (is_dashing) {
+				if (current_animation != animation.dash) {
+					create_dash_fx(id);
+					audio_play(audio_emitter, false, pr_low, sfx_dash1, sfx_dash2, sfx_dash3);
+				}
+				play_animation(animation.dash, 0.16, an_loop, pr_low);
+			} else {
+				play_animation(animation.walk, 0.16, an_loop, pr_low);
+			}
+		} else {
+			play_animation(animation.idle, 0.16, an_loop, pr_low);
+		}
+		update_animation();
+		
+	#endregion
+	#region Sound.
+		
+		audio_emitter_position(audio_emitter, x, y, 0);
+		
+	#endregion
+	#region Footsteps and sprint effect.
+			
+		switch (current_animation) {
+			case animation.walk:
+				current_footstep_time += delta_time;
+				if (current_footstep_time >= walk_footstep_duration) {
+					audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
+								sfx_footsteps5);
+					current_footstep_time = 0;
+				}
+			break;
+			case animation.sprint:
+				current_footstep_time += delta_time;
+				if (current_footstep_time >= sprint_footstep_duration) {
+					audio_play(audio_emitter, false, pr_low, sfx_footsteps1, sfx_footsteps2, sfx_footsteps3, sfx_footsteps4,
+								sfx_footsteps5);
+					current_footstep_time = 0;
+				}
+				/*if (current_animation != animation.sprint) {
+					audio_play(audio_emitter, false, pr_low, sfx_sprint);
+				}*/
+				current_sprint_time += delta_time;
+				if (current_sprint_time >= sprint_duration) {
+					current_sprint_time = 0;
+					create_sprint_fx(id);
+				}
+			break;
+			default:
+				current_footstep_time = 0;
+			break;
 		}
 	
 	#endregion

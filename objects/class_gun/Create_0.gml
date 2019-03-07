@@ -21,21 +21,16 @@
 #endregion
 #region Reload.
 
-	is_reloading = false;		// If the gun is reloading.
-	current_reload_time = 0;
-	reload_duration = 1500000;
+	is_reloading = false;			// If the gun is reloading.
+	current_reload_time = 0;		//
+	reload_duration = 1500000;		//
 
 #endregion
 #region Recoil.
 
-	current_recoil = 0;
-	recoil_speed = 0;
-	recoil_max = 7;
-	recoil_return = 1.25;
-
-#endregion
-#region Sound.
-
-
+	current_recoil = 0;			//
+	recoil_speed = 0;			//
+	recoil_max = 7;				//
+	recoil_return = 1.25;		//
 
 #endregion
