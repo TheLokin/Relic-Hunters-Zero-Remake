@@ -16,7 +16,7 @@ if (!global.pause) {
 				var _player = instance_nearest(x, y, class_player);
 			
 				if (_player != noone && point_distance(x, y, _player.x, _player.y) < action_range &&
-					collision_line(x, y, _player.x, _player.y, class_collision, false, true)) {
+					collision_line(x, y, _player.x, _player.y, obj_collision, false, true)) {
 					want_activate_ai = true;
 				}
 			}
@@ -43,8 +43,8 @@ if (!global.pause) {
 			var _target_x = lengthdir_x(move_speed*delta_time*ms_to_s_60, move_direction);
 			var _target_y = lengthdir_y(move_speed*delta_time*ms_to_s_60, move_direction);
 				
-			if (place_meeting(x+_target_x, y, class_collision)) {
-				while (!place_meeting(x+sign(_target_x), y, class_collision)) {
+			if (place_meeting(x+_target_x, y, obj_collision)) {
+				while (!place_meeting(x+sign(_target_x), y, obj_collision)) {
 					x += sign(_target_x);
 				}
 			} else {
@@ -53,8 +53,8 @@ if (!global.pause) {
 			if (_target_x != 0) { 
 				image_xscale = sign(_target_x);
 			}
-			if (place_meeting(x, y+_target_y, class_collision)) {
-				while (!place_meeting(x, y+sign(_target_y), class_collision)) {
+			if (place_meeting(x, y+_target_y, obj_collision)) {
+				while (!place_meeting(x, y+sign(_target_y), obj_collision)) {
 					y += sign(_target_y);
 				}
 			} else {

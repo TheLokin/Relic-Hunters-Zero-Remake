@@ -4,7 +4,7 @@
 
 ini_open(file_options);
 
-#region Opciones de idioma.
+#region Language.
 	
 	if (controller_game.option_language != noone) {
 		ini_write_string("language", "language" , controller_game.language_id[controller_game.option_language, 0]);		// Idioma.
@@ -17,23 +17,44 @@ ini_open(file_options);
 	ini_write_real("video", "fullscreen", controller_game.option_fullscreen);		// Pantalla completa.
 	
 #endregion
-#region Opciones de audio.
+#region Volume.
+	
+	ini_write_real("volume", "master", global.volume_master);
+	ini_write_real("volume", "sound", global.volume_sound);
+	ini_write_real("volume", "music", global.volume_music);
 
-	ini_write_real("audio", "master", controller_game.option_master);		// Volumen global.
-	ini_write_real("audio", "sound", controller_game.option_sound);			// Volumen del sonido.
-	ini_write_real("audio", "music", controller_game.option_music);			// Volumen de la música.
+#endregion
+#region Keyboard mapping.
+
+	ini_write_real("mapping", "keyboard_up1", global.keyboard_up1);
+	ini_write_real("mapping", "keyboard_up2", global.keyboard_up2);
+	ini_write_real("mapping", "keyboard_down1", global.keyboard_down1);
+	ini_write_real("mapping", "keyboard_down2", global.keyboard_down2);
+	ini_write_real("mapping", "keyboard_left1", global.keyboard_left1);
+	ini_write_real("mapping", "keyboard_left2", global.keyboard_left2);
+	ini_write_real("mapping", "keyboard_right1", global.keyboard_right1);
+	ini_write_real("mapping", "keyboard_right2", global.keyboard_right2);
+	ini_write_real("mapping", "keyboard_sprint", global.keyboard_sprint);
+	ini_write_real("mapping", "keyboard_dash", global.keyboard_dash);
+	ini_write_real("mapping", "keyboard_interaction", global.keyboard_interaction);
+	ini_write_real("mapping", "keyboard_shot", global.keyboard_shot);
+	ini_write_real("mapping", "keyboard_aim", global.keyboard_aim);
+	ini_write_real("mapping", "keyboard_reload", global.keyboard_reload);
+	ini_write_real("mapping", "keyboard_switch", global.keyboard_switch);
+	ini_write_real("mapping", "keyboard_grenade", global.keyboard_grenade);
 	
 #endregion
-#region Opciones de teclado.
+#region Gamepad mapping.
 
-	ini_write_real("keyboard", "move_up1", controller_game.option_keyboard[0, 0]);			// Tecla principal para moverse hacia arriba con el teclado.
-	ini_write_real("keyboard", "move_up2", controller_game.option_keyboard[0, 1]);			// Tecla secundaria para moverse hacia arriba con el teclado.
-	ini_write_real("keyboard", "move_down1", controller_game.option_keyboard[1, 0]);		// Tecla principal para moverse hacia abajo con el teclado.
-	ini_write_real("keyboard", "move_down2", controller_game.option_keyboard[1, 1]);		// Tecla secundaria para moverse hacia abajo con el teclado.
-	ini_write_real("keyboard", "move_left1", controller_game.option_keyboard[2, 0]);		// Tecla principal para moverse hacia la izquierda con el teclado.
-	ini_write_real("keyboard", "move_left2", controller_game.option_keyboard[2, 1]);		// Tecla secundaria para moverse hacia la izquierda con el teclado.
-	ini_write_real("keyboard", "move_right1", controller_game.option_keyboard[3, 0]);		// Tecla principal para moverse hacia la derecha con el teclado.
-	ini_write_real("keyboard", "move_right2", controller_game.option_keyboard[3, 1]);		// Tecla secundaria para moverse hacia la derecha con el teclado.
+	ini_write_real("mapping", "gamepad_sprint1", global.gamepad_sprint1);
+	ini_write_real("mapping", "gamepad_sprint2", global.gamepad_sprint2);
+	ini_write_real("mapping", "gamepad_dash", global.gamepad_dash);
+	ini_write_real("mapping", "gamepad_interaction", global.gamepad_interaction);
+	ini_write_real("mapping", "gamepad_shot", global.gamepad_shot);
+	ini_write_real("mapping", "gamepad_aim", global.gamepad_aim);
+	ini_write_real("mapping", "gamepad_reload", global.gamepad_reload);
+	ini_write_real("mapping", "gamepad_switch", global.gamepad_switch);
+	ini_write_real("mapping", "gamepad_grenade", global.gamepad_grenade);
 
 #endregion
 

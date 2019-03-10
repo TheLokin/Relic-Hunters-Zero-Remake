@@ -13,11 +13,11 @@ if (is_digging) {
 	//var _dig_progress = dig_depth_max/3;
 	
 	/*if (dig_depth >= _dig_progress*2) {
-		draw_sprite_ext(spr_dig_pile, 2, x, y, 1, 1, 0, global.dirt_color, 1);
+		draw_sprite_ext(spr_dig_pile, 2, x, y, 1, 1, 0, controller_level.dirt_color, 1);
 	} else if (dig_depth >= _dig_progress) {
-		draw_sprite_ext(spr_dig_pile, 1, x, y, 1, 1, 0, global.dirt_color, 1);
+		draw_sprite_ext(spr_dig_pile, 1, x, y, 1, 1, 0, controller_level.dirt_color, 1);
 	} else {
-		draw_sprite_ext(spr_dig_pile, 0, x, y, 1, 1, 0, global.dirt_color, 1);
+		draw_sprite_ext(spr_dig_pile, 0, x, y, 1, 1, 0, controller_level.dirt_color, 1);
 	}*/
 } else {
 	draw_self();

@@ -4,7 +4,7 @@
 
 ini_open(file_options);
 
-#region Opciones de idioma.
+#region Language.
 
 	controller_game.option_language = ini_read_string("language", "language" , "EN");
 	if (directory_exists(dir_lang)) {
@@ -49,57 +49,71 @@ ini_open(file_options);
 	#endregion
 	
 #endregion
-#region Opciones de audio.
-
-	#region Volumen global.
+#region Volume master.
 	
-		controller_game.option_master = round(ini_read_real("audio", "master", 10));
-		if (controller_game.option_master > 10) {
-			controller_game.option_master = 10;
-		}
-		if (controller_game.option_master < 0) {
-			controller_game.option_master = 0;
-		}
-		master_update(controller_game.option_master);
-	
-	#endregion
-	#region Volumen del sonido.
-	
-		controller_game.option_sound = round(ini_read_real("audio", "sound", 10));
-		if (controller_game.option_sound > 10) {
-			controller_game.option_sound = 10;
-		}
-		if (controller_game.option_sound < 0) {
-			controller_game.option_sound = 0;
-		}
-		sound_update(controller_game.option_sound);
-	
-	#endregion
-	#region Volumen de la música.
-	
-		controller_game.option_music = round(ini_read_real("audio", "music", 10));
-		if (controller_game.option_music > 10) {
-			controller_game.option_music = 10;
-		}
-		if (controller_game.option_music < 0) {
-			controller_game.option_music = 0;
-		}
-		music_update(controller_game.option_music);
-	
-	#endregion
+	global.volume_master = round(ini_read_real("volume", "master", global.volume_master));
+	if (global.volume_master > 10) {
+		global.volume_master = 10;
+	} else if (global.volume_master < 0) {
+		global.volume_master = 0;
+	}
+	master_update(global.volume_master);
 	
 #endregion
-#region Opciones de teclado.
-
-	controller_game.option_keyboard[0, 0] = round(ini_read_real("keyboard", "move_up1", ord("W")));
-	controller_game.option_keyboard[0, 1] = round(ini_read_real("keyboard", "move_up2", vk_up));
-	controller_game.option_keyboard[1, 0] = round(ini_read_real("keyboard", "move_down1", ord("S")));
-	controller_game.option_keyboard[1, 1] = round(ini_read_real("keyboard", "move_down2", vk_down));
-	controller_game.option_keyboard[2, 0] = round(ini_read_real("keyboard", "move_left1", ord("A")));
-	controller_game.option_keyboard[2, 1] = round(ini_read_real("keyboard", "move_left2", vk_left));
-	controller_game.option_keyboard[3, 0] = round(ini_read_real("keyboard", "move_right1", ord("D")));
-	controller_game.option_keyboard[3, 1] = round(ini_read_real("keyboard", "move_right2", vk_right));
-
+#region Volume sound.
+	
+	global.volume_sound = round(ini_read_real("volume", "sound", global.volume_sound));
+	if (global.volume_sound > 10) {
+		global.volume_sound = 10;
+	} else if (global.volume_sound < 0) {
+		global.volume_sound = 0;
+	}
+	sound_update(global.volume_sound);
+	
+#endregion
+#region Volume music.
+	
+	global.volume_music = round(ini_read_real("volume", "music", global.volume_music));
+	if (global.volume_music > 10) {
+		global.volume_music = 10;
+	} else if (global.volume_music < 0) {
+		global.volume_music = 0;
+	}
+	music_update(global.volume_music);
+	
+#endregion
+#region Keyboard mapping.
+	
+	global.keyboard_up1 = round(ini_read_real("mapping", "keyboard_up1", global.keyboard_up1));
+	global.keyboard_up2 = round(ini_read_real("mapping", "keyboard_up2", global.keyboard_up2));
+	global.keyboard_down1 = round(ini_read_real("mapping", "keyboard_down1", global.keyboard_down1));
+	global.keyboard_down2 = round(ini_read_real("mapping", "keyboard_down2", global.keyboard_down2));
+	global.keyboard_left1 = round(ini_read_real("mapping", "keyboard_left1", global.keyboard_left1));
+	global.keyboard_left2 = round(ini_read_real("mapping", "keyboard_left2", global.keyboard_left2));
+	global.keyboard_right1 = round(ini_read_real("mapping", "keyboard_right1", global.keyboard_right1));
+	global.keyboard_right2 = round(ini_read_real("mapping", "keyboard_right2", global.keyboard_right2));
+	global.keyboard_sprint = round(ini_read_real("mapping", "keyboard_sprint", global.keyboard_sprint));
+	global.keyboard_dash = round(ini_read_real("mapping", "keyboard_dash", global.keyboard_dash));
+	global.keyboard_interaction = round(ini_read_real("mapping", "keyboard_interaction", global.keyboard_interaction));
+	global.keyboard_shot = round(ini_read_real("mapping", "keyboard_shot", global.keyboard_shot));
+	global.keyboard_aim = round(ini_read_real("mapping", "keyboard_aim", global.keyboard_aim));
+	global.keyboard_reload = round(ini_read_real("mapping", "keyboard_reload", global.keyboard_reload));
+	global.keyboard_switch = round(ini_read_real("mapping", "keyboard_switch", global.keyboard_switch));
+	global.keyboard_grenade = round(ini_read_real("mapping", "keyboard_grenade", global.keyboard_grenade));
+		
+#endregion
+#region Gamepad mapping.
+	
+	global.gamepad_sprint1 = round(ini_read_real("mapping", "gamepad_sprint1", global.gamepad_sprint1));
+	global.gamepad_sprint2 = round(ini_read_real("mapping", "gamepad_sprint2", global.gamepad_sprint2));
+	global.gamepad_dash = round(ini_read_real("mapping", "gamepad_dash", global.gamepad_dash));
+	global.gamepad_interaction = round(ini_read_real("mapping", "gamepad_interaction", global.gamepad_interaction));
+	global.gamepad_shot = round(ini_read_real("mapping", "gamepad_shot", global.gamepad_shot));
+	global.gamepad_aim = round(ini_read_real("mapping", "gamepad_aim", global.gamepad_aim));
+	global.gamepad_reload = round(ini_read_real("mapping", "gamepad_reload", global.gamepad_reload));
+	global.gamepad_switch = round(ini_read_real("mapping", "gamepad_switch", global.gamepad_switch));
+	global.gamepad_grenade = round(ini_read_real("mapping", "gamepad_grenade", global.gamepad_grenade));
+	
 #endregion
 
 ini_close();

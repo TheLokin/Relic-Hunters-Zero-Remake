@@ -6,13 +6,13 @@ if (instance_exists(obj_button_language) && controller_game.option_language != n
 	controller_game.option_language = obj_button_language.option;
 }
 if (instance_exists(obj_button_master)) {
-	controller_game.option_master = obj_button_master.option;
+	global.volume_master = obj_button_master.option;
 }
 if (instance_exists(obj_button_sound)) {
-	controller_game.option_sound = obj_button_sound.option;
+	global.volume_sound = obj_button_sound.option;
 }
 if (instance_exists(obj_button_music)) {
-	controller_game.option_music = obj_button_music.option;
+	global.volume_music = obj_button_music.option;
 }
 if (instance_exists(obj_button_fullscreen)) {
 	controller_game.option_fullscreen = obj_button_fullscreen.option;

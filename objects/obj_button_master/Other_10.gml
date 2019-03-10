@@ -1,6 +1,6 @@
 /// @description Opciones
 
-option = controller_game.option_master;
+option = global.volume_master;
 for (var _option = 0; _option <= 10; _option++) {
 	label_option[_option] = string(_option);
 }

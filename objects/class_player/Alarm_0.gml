@@ -1,3 +1,3 @@
-/// @description Make the player vulnerable
+/// @description Player vulnerable
 
 is_vulnerable = true;

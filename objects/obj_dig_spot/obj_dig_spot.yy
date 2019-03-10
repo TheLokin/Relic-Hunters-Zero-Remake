@@ -2,7 +2,7 @@
     "id": "1e586a37-0516-425f-a3b1-836e067d865d",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "dig_spot",
+    "name": "obj_dig_spot",
     "eventList": [
         {
             "id": "3f17bd52-b4a0-4de9-9098-afd33a1c5bf4",

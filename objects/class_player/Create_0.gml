@@ -1,5 +1,5 @@
 /// @description Variables
-
+			
 #region Information.
 	
 	name = "unsigned";		// Player name.
@@ -142,7 +142,7 @@
 
 #endregion
 #region Animation.
-
+	
 	sprite_face = noone;					// Sprite about the player's health to show in the hud.
 	sprite_idle = noone;					// Sprite with the animation when the player is idle.
 	sprite_walk = noone;					// Sprite with the animation when the player is walking.

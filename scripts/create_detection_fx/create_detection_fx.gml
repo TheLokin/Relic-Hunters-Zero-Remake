@@ -14,7 +14,7 @@
 
 #endregion
 
-var _detection = instance_create_layer(x, y, "interactive", fx_detection);
+var _detection = instance_create_layer(_owner.x, _owner.y, "interactive", fx_detection);
 var _enemies_activated = 0;
 
 _detection.sprite_index = _owner.sprite_detection_fx;

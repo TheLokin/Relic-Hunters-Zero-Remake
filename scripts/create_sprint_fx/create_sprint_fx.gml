@@ -14,7 +14,9 @@
 
 #endregion
 
-var _sprint = instance_create_layer(x, y, "interactive", fx_sprint);
+var _sprint = instance_create_layer(_owner.x, _owner.y, "interactive", fx_sprint);
 
-_sprint.sprite_index = _owner.sprite_sprint_fx;
-_sprint.image_xscale = _owner.image_xscale;
+with (_sprint) {
+	sprite_index = _owner.sprite_sprint_fx;
+	image_xscale = _owner.image_xscale;
+}

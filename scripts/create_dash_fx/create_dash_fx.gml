@@ -14,7 +14,10 @@
 
 #endregion
 
-var _dash = instance_create_layer(x, y, "interactive", fx_dash);
+var _dash = instance_create_layer(_owner.x, _owner.y, "interactive", fx_dash);
 
-_dash.owner = _owner;
-_dash.sprite_index = _owner.sprite_dash_fx;
+with (_dash) {
+	owner = _owner;
+	sprite_index = _owner.sprite_dash_fx;
+}
+audio_play(_owner.audio_emitter, false, pr_low, sfx_dash1, sfx_dash2, sfx_dash3);

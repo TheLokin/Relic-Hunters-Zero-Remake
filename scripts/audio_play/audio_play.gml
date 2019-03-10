@@ -19,4 +19,6 @@
 
 #endregion
 
+// function choose
+
 audio_play_sound_on(_emitter, argument[irandom_range(3, argument_count-1)], _loop, _priority);

@@ -1,6 +1,6 @@
 /// @description Opciones
 
-option = controller_game.option_music;
+option = global.volume_music;
 for (var _option = 0; _option <= 10; _option++) {
 	label_option[_option] = string(_option);
 }

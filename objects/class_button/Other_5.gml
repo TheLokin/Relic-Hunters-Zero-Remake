@@ -1,3 +1,3 @@
-/// @description Destruir
+/// @description Destroy
 
 instance_destroy();

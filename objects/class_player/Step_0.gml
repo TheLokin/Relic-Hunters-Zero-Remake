@@ -163,15 +163,15 @@ if (!global.pause) {
 				var _target_x = lengthdir_x(move_speed*delta_time*ms_to_s_60, move_direction);
 				var _target_y = lengthdir_y(move_speed*delta_time*ms_to_s_60, move_direction);
 				
-				if (place_meeting(x+_target_x, y, class_collision)) {
-					while (!place_meeting(x+sign(_target_x), y, class_collision)) {
+				if (place_meeting(x+_target_x, y, obj_collision)) {
+					while (!place_meeting(x+sign(_target_x), y, obj_collision)) {
 						x += sign(_target_x);
 					}
 				} else {
 					x += _target_x;
 				}
-				if (place_meeting(x, y+_target_y, class_collision)) {
-					while (!place_meeting(x, y+sign(_target_y), class_collision)) {
+				if (place_meeting(x, y+_target_y, obj_collision)) {
+					while (!place_meeting(x, y+sign(_target_y), obj_collision)) {
 						y += sign(_target_y);
 					}
 				} else {
@@ -252,23 +252,23 @@ if (!global.pause) {
 		#region Shield.
 		
 		#endregion
-		#region Stamina.
-		
-			if (is_sprinting) {
-				stamina -= sprint_stamina;
-				if (stamina < 0) {
-					stamina = 0;
-				}
-			}
-			if (!is_sprinting && !is_dashing && !is_meleeing && !is_throwing) {
-				stamina += stamina_regeneration;
-				if (stamina > stamina_max) {
-					stamina = stamina_max;
-				}
-			}
-		
-		#endregion
 	}
+	#region Stamina.
+		
+		if (is_sprinting && current_animation != animation.dig) {
+			stamina -= sprint_stamina;
+			if (stamina < 0) {
+				stamina = 0;
+			}
+		}
+		if (!is_sprinting && !is_dashing && !is_meleeing && !is_throwing) {
+			stamina += stamina_regeneration;
+			if (stamina > stamina_max) {
+				stamina = stamina_max;
+			}
+		}
+		
+	#endregion
 	#region Interaction.
 		
 		if (input_keyboard_interaction_pressed() || input_gamepad_interaction_pressed()) {
@@ -304,14 +304,17 @@ if (!global.pause) {
 	#region Dig.
 	
 		if (global.relic_detected) {
-			if (!is_dashing && current_animation != animation.dig && (input_keyboard_interaction_pressed() ||
-				input_gamepad_interaction_pressed())) {
+			if (!is_dashing && !weapon_selected.is_reloading && current_animation != animation.dig &&
+				(input_keyboard_interaction_pressed() || input_gamepad_interaction_pressed())) {
 				play_animation(animation.dig, 0.12, an_clamp, pr_hight);
-				if (place_meeting(x, y, dig_spot)) {
+				if (place_meeting(x, y, obj_dig_spot)) {
 					is_digging = true;
 				} else {
 					create_detector_fx(id);
 				}
+			}
+			if (current_animation == animation.dig && animation_index >= 2 && animation_index < 2.12) {
+				create_dirt_fx(id);
 			}
 			if (is_digging && dig_depth >= dig_depth_max) {
 				is_digging = false;
@@ -332,7 +335,6 @@ if (!global.pause) {
 			} else if (is_dashing) {
 				if (current_animation != animation.dash) {
 					create_dash_fx(id);
-					audio_play(audio_emitter, false, pr_low, sfx_dash1, sfx_dash2, sfx_dash3);
 				}
 				play_animation(animation.dash, 0.16, an_loop, pr_low);
 			} else {

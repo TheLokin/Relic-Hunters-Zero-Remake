@@ -7,14 +7,16 @@ global.pause = false;		// Pause.
 global.gamepad = noone;
 
 global.relic_detected = true;
-global.dirt_color = c_magenta;
 
 map_owners = ds_map_create();		// Map with the owners who performs the actions.
 
 global.player = noone;		// Player.
 
 #region Game options.
-
+	
+	global.volume_master = 10;				//
+	global.volume_sound = 3;				//
+	global.volume_music = 2;				//
 	global.allow_double_tap = true;			// Allow double tap to perform the player dash.
 	global.allow_wheel_mouse = true;		// Allow the wheel mouse to change weapons.
 	global.screen_shake_ratio = 1;
@@ -32,11 +34,11 @@ global.player = noone;		// Player.
 	global.keyboard_right2 = vk_right;
 	global.keyboard_sprint = vk_space;
 	global.keyboard_dash = vk_space;
+	global.keyboard_interaction = 69;
 	global.keyboard_shot = mb_left;
 	global.keyboard_aim = mb_right;
 	global.keyboard_reload = 82;
 	global.keyboard_switch = vk_tab;
-	global.keyboard_interaction = 69;
 	global.keyboard_grenade = noone;
 	
 #endregion
@@ -45,10 +47,11 @@ global.player = noone;		// Player.
 	global.gamepad_sprint1 = gp_face1;
 	global.gamepad_sprint2 = gp_stickl;
 	global.gamepad_dash = gp_face1;
+	global.gamepad_interaction = gp_face3;
 	global.gamepad_shot = gp_shoulderrb;
+	global.gamepad_aim = noone;
 	global.gamepad_reload = noone;
 	global.gamepad_switch = gp_face4;
-	global.gamepad_interaction = gp_face3;
 	global.gamepad_grenade = noone;
 
 #endregion

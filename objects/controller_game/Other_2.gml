@@ -13,7 +13,7 @@ resolution[5, 0] = 1920;	resolution[5, 1] = 1080;
 resolution[6, 0] = 2560;	resolution[6, 1] = 1440;
 resolution[7, 0] = 3200;	resolution[7, 1] = 1800;
 resolution[8, 0] = 3840;	resolution[8, 1] = 2160;
-
+	
 options_load();
 
 #region Audio.
