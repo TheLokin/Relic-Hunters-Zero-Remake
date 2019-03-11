@@ -6,9 +6,9 @@
 	
 #endregion
 #region Spawn.
-
+	
 	is_vulnerable = false;																// If the player is vulnerable.
-	invulnerable_duration = room_speed*2;												// Duration until the player is vulnerable.
+	invulnerable_duration = room_speed*0.2;												// Duration until the player is vulnerable.
 	alarm[0] = invulnerable_duration;													// Cooldown to become the player vulnerable.
 	add_owner(id);																		// Create the list of instances linked to the player.
 	link_owner(id, instance_create_layer(x, y, "interactive_over", dynamic_bar));		// Link the dynamic bar to the player.
@@ -55,6 +55,7 @@
 #endregion
 #region Movement.
 
+	allow_movement = false;			// Allow player movement.
 	move_acceleration = 1.5;		// Player acceleration.
 	move_friction = 0.45;			// Friction when the player is walking.
 	move_speed = 0;					// Player speed.
@@ -70,10 +71,10 @@
 #endregion
 #region Sprint.
 
-	is_sprinting = false;					// If the player's state is sprinting.
-	sprint_speed_max = 5.5;					// Speed when the player is sprinting.
+	is_sprinting = false;					// If the player is sprinting.
 	can_sprint = true;						// Sprint available.
-	sprint_delay = room_speed*0.2;			// Delay between two sprints.
+	sprint_delay = room_speed*0.2;			// Delay between two sprint.
+	sprint_speed_max = 5.5;					// Speed when the player is sprinting.
 	sprint_stamina = 0.3;					// Stamina cost of each sprint.
 	sprint_stamina_min = 10;				// Minimum stamina to sprint.
 	sprint_footstep_duration = 250000;		// Duration between footsteps in milliseconds when the player is sprinting.
@@ -83,7 +84,9 @@
 #endregion
 #region Dash.
 
-	is_dashing = false;					// If the player's state is dashing.
+	is_dashing = false;					// If the player is dashing.
+	can_dash = true;					// Dash available.
+	dash_delay = room_speed*0.2;		// Delay between two dash.
 	dash_friction = 0.2;				// Friction when the player is dashing.
 	dash_speed = 10;					// Speed when the player is dashing.
 	dash_duration = 400000;				// Duration of the dash in milliseconds.
@@ -102,12 +105,9 @@
 #endregion
 #region Dig.
 
-	is_digging = false;		// If the player's state is digging.
-	dig_speed = 0;
-	dig_depth = 0;
-	dig_depth_max = 42; //Esto igual es la mitad
-	dig_rate = room_speed*0.3;
-	current_dig_rate = dig_rate;
+	is_digging = false;		// If the player is digging.
+	dig_speed = 4;			// Speed digging.
+	dig_depth = 0;			// Current digging depth.
 
 #endregion
 #region Interaction.

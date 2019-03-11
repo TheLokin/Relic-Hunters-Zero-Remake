@@ -1,7 +1,7 @@
 /// @description Actions
 
 if (!global.pause) {
-	if (!is_digging && current_animation != animation.dig) {
+	if (allow_movement && !is_digging && current_animation != animation.dig) {
 		speed = move_speed;
 		direction = move_direction;
 		var _dash_direction = noone;
@@ -71,7 +71,7 @@ if (!global.pause) {
 		#endregion
 		#region Dash.
 			
-			var _can_dash = false;
+			var _dash_pressed = false;
 			
 			if (global.allow_double_tap) {
 				if (input_keyboard_dash_pressed() || input_gamepad_dash_pressed()) {
@@ -87,13 +87,14 @@ if (!global.pause) {
 				if (double_tap_timer >= 2 && (input_keyboard_dash() || input_gamepad_dash())) {
 					double_tap_timer = 0;
 					double_tap_interval = 0;
-					_can_dash = true;
+					_dash_pressed = true;
 				}
-			} else if (input_keyboard_dash() || input_gamepad_dash()) {
-				_can_dash = true;
+			} else if (!is_dashing && (input_keyboard_dash() || input_gamepad_dash())) {
+				_dash_pressed = true;
 			}
-			if (_can_dash && stamina >= dash_stamina) {
+			if (can_dash && _dash_pressed && stamina >= dash_stamina) {
 				is_dashing = true;
+				can_dash = false;
 				stamina -= dash_stamina;
 				speed = dash_speed;
 				if (_dash_direction != noone) {
@@ -101,12 +102,14 @@ if (!global.pause) {
 				} else {
 					direction = 180+point_direction(x, y, crosshair_x, crosshair_y);
 				}
+				create_dash_fx(id);
 			}
 			if (is_dashing) {
 				current_dash_time += delta_time;
 				if (current_dash_time >= dash_duration) {
 					is_dashing = false;
 					current_dash_time = 0;
+					alarm[2] = dash_delay;
 				}
 			}
 			
@@ -255,7 +258,7 @@ if (!global.pause) {
 	}
 	#region Stamina.
 		
-		if (is_sprinting && current_animation != animation.dig) {
+		if (is_sprinting && !is_dashing && current_animation != animation.dig) {
 			stamina -= sprint_stamina;
 			if (stamina < 0) {
 				stamina = 0;
@@ -303,24 +306,22 @@ if (!global.pause) {
 	#endregion
 	#region Dig.
 	
-		if (global.relic_detected) {
+		if (instance_exists(obj_dig_spot)) {
 			if (!is_dashing && !weapon_selected.is_reloading && current_animation != animation.dig &&
 				(input_keyboard_interaction_pressed() || input_gamepad_interaction_pressed())) {
+				move_speed = 0;
 				play_animation(animation.dig, 0.12, an_clamp, pr_hight);
 				if (place_meeting(x, y, obj_dig_spot)) {
 					is_digging = true;
+					dig_depth += dig_speed;
 				} else {
 					create_detector_fx(id);
 				}
 			}
-			if (current_animation == animation.dig && animation_index >= 2 && animation_index < 2.12) {
-				create_dirt_fx(id);
-			}
-			if (is_digging && dig_depth >= dig_depth_max) {
+			if (is_digging && dig_depth >= obj_dig_spot.dig_depth) {
 				is_digging = false;
 				dig_depth = 0;
-				current_dig_rate = dig_rate;
-				global.relic_detected = false;
+				instance_destroy(obj_dig_spot);
 			}
 		}
 	
@@ -333,9 +334,6 @@ if (!global.pause) {
 			if (is_sprinting) {
 				play_animation(animation.sprint, 0.16, an_loop, pr_low);
 			} else if (is_dashing) {
-				if (current_animation != animation.dash) {
-					create_dash_fx(id);
-				}
 				play_animation(animation.dash, 0.16, an_loop, pr_low);
 			} else {
 				play_animation(animation.walk, 0.16, an_loop, pr_low);
@@ -344,6 +342,13 @@ if (!global.pause) {
 			play_animation(animation.idle, 0.16, an_loop, pr_low);
 		}
 		update_animation();
+		switch (current_animation) {
+			case animation.dig:
+				if (animation_index >= 2 && animation_index < 2+animation_speed) {
+					create_dirt_fx(id);
+				}
+			break;
+		}
 		
 	#endregion
 	#region Sound.

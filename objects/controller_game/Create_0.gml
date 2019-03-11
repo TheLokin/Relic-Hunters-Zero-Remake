@@ -6,8 +6,6 @@ global.debug = true;		// Modo debug.
 global.pause = false;		// Pause.
 global.gamepad = noone;
 
-global.relic_detected = true;
-
 map_owners = ds_map_create();		// Map with the owners who performs the actions.
 
 global.player = noone;		// Player.
@@ -32,7 +30,7 @@ global.player = noone;		// Player.
 	global.keyboard_left2 = vk_left;
 	global.keyboard_right1 = 68;
 	global.keyboard_right2 = vk_right;
-	global.keyboard_sprint = vk_space;
+	global.keyboard_sprint = vk_shift;
 	global.keyboard_dash = vk_space;
 	global.keyboard_interaction = 69;
 	global.keyboard_shot = mb_left;
