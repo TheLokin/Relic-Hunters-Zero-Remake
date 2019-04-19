@@ -1,3 +1,3 @@
-/// @description Centrar ventana
+/// @description Window center
 
 window_center();

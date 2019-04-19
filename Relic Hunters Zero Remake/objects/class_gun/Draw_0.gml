@@ -21,7 +21,7 @@ switch (object_get_parent(owner.object_index)) {
 			draw_set_color(c_yellow);
 			draw_circle(x, y, projectile_range, true);
 			draw_set_color(c_red);
-			draw_line(x, y, global.player.crosshair_x, global.player.crosshair_y);
+			draw_line(x, y, owner.crosshair_x, owner.crosshair_y);
 		}
 	break;
 }

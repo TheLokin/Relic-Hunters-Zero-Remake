@@ -14,11 +14,10 @@
 
 #endregion
 
-var _detector = instance_create_layer(_owner.x, _owner.y, "interactive_under", fx_detector);
 var _dig_spot_distance = point_distance(_owner.x, _owner.y, obj_dig_spot.x, obj_dig_spot.y);
 var _duration = room_speed;
 
-with (_detector) {
+with (instance_create_layer(_owner.x, _owner.y, "interactive_under", fx_detector)) {
 	if (_dig_spot_distance <= 240) {
 		target_radius = 120;
 		color = c_crimson;
@@ -34,9 +33,7 @@ with (_detector) {
 	}
 }
 if (!instance_exists(fx_detector_arrow)) {
-	var _detector_arrow = instance_create_layer(_owner.x, _owner.y, "interactive_over", fx_detector_arrow);
-	
-	with (_detector_arrow) {
+	with (instance_create_layer(_owner.x, _owner.y, "interactive_over", fx_detector_arrow)) {
 		owner = _owner;
 		alarm[0] = _duration;
 	}

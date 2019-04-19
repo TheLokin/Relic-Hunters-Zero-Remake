@@ -1,10 +1,11 @@
- /// @description Acciones
+ /// @description Actions
 
 event_inherited();
 
-if (minus_button.update || plus_button.update) {
-	set_language(controller_game.language_id[option, 1]);
-	with (class_label) {
+if (execute_action) {
+	text_secondary = get_lang_code(option);
+	set_language(option);
+	with (class_text) {
 		reload_text = true;
 	}
 }

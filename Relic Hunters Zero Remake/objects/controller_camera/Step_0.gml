@@ -30,8 +30,8 @@ switch (room) {
 	case rm_intro: case rm_menu1: case rm_menu2: case rm_menu3: case rm_menu4: case rm_menu5: case rm_menu6: case rm_menu7:
 	break;
 	default:
-		x += (x_to-x)/16;
-		y += (y_to-y)/16;
+		x += (x_to-x)/8;
+		y += (y_to-y)/8;
 		if (instance_exists(class_player) != noone) {
 			/*var _gamepad = get_gamepad_connected();*/
 			
@@ -46,8 +46,10 @@ switch (room) {
 				x_to = class_player.x-view_widht/2;
 				y_to = class_player.y-view_height/2;
 			} else {
-				x_to = lerp(class_player.x, mouse_x, 0.35)-view_widht/2;
-				y_to = lerp(class_player.y, mouse_y, 0.35)-view_height/2;
+				x_to = lerp(global.player1.x, mouse_x, 0.35)-view_widht/2;
+				y_to = lerp(global.player1.y, mouse_y, 0.35)-view_height/2;
+				//x = (global.player.x+(mouse_x-global.player.x)/2)-camera_get_view_width(camera)/2;
+				//y = (global.player.y+(mouse_y-global.player.y)/2)-camera_get_view_width(camera)/2;
 			}
 		}
 		camera_set_view_mat(camera, matrix_build_lookat(x, y, -10, x, y, 0, 0, 1, 0));

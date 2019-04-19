@@ -22,11 +22,20 @@ switch (room) {
 		}
 	break;
 	case rm_menu3:		
-		if (obj_button_fullscreen.option != controller_game.option_fullscreen) {
-			resolution_switch(controller_game.option_fullscreen);
+		if (global.fullscreen != button_fullscreen.option) {
+			window_set_fullscreen(global.fullscreen);
+			window_set_resolution(button_resolution.option);
 		}
-		if (obj_button_resolution.option != controller_game.option_resolution) {
-			resolution_update(controller_game.option_resolution);
+		if (global.resolution != button_resolution.option) {
+			window_set_resolution(global.resolution);
+		}
+		if (global.vsync != button_vsync.option) {
+			display_reset(0, global.vsync);
+		}
+	break;
+	case rm_menu4:
+		if (global.double_tap != button_double_tap.option) {
+			global.double_tap = button_double_tap.option;
 		}
 	break;
 }

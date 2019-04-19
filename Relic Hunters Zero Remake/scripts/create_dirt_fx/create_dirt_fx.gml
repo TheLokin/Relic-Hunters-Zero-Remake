@@ -20,9 +20,7 @@
 #endregion
 
 repeat(irandom_range(_min, _max)) {
-	var _dirt = instance_create_layer(_owner.x+11*_owner.image_xscale, _owner.y-13, "interactive", fx_dirt);
-	
-	with (_dirt) {
+	with (instance_create_layer(_owner.x+11*_owner.image_xscale, _owner.y-13, "interactive", fx_dirt)) {
 		height_max += 10;
 		depth = _owner.depth-2;
 		if (place_meeting(x, y, obj_collision)) {

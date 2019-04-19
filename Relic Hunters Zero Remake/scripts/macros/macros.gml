@@ -1,3 +1,30 @@
+#region Game.
+
+	#macro version "Alpha [0.0.1]"
+	#macro base_width 640
+	#macro base_height 360
+
+#endregion
+#region Files.
+
+	#macro file_options working_directory+"options.ini"
+	#macro file_lang working_directory+"lang/languages.json"
+	#macro dir_lang working_directory+"lang/"
+	#macro dir_font working_directory+"lang/font/"
+	
+#endregion
+#region Gamepad.
+
+	#macro joy_deadzone 0.3
+	
+#endregion
+#region Fonts.
+
+	#macro ft_small 6
+	#macro ft_medium 12
+	#macro ft_large 18
+
+#endregion
 #region Animation.
 
 	#macro ms_to_s_60 0.00006
@@ -17,34 +44,6 @@
 	#macro pr_low 0
 	#macro pr_hight 1
 
-#endregion
-#region Resolución.
-
-	#macro base_width 640
-	#macro base_height 360
-
-#endregion
-#region Archivos.
-
-	#macro file_options working_directory+"options.ini"
-	#macro file_lang working_directory+"lang/languages.json"
-	#macro dir_lang working_directory+"lang/"
-	#macro dir_font working_directory+"lang/font/"
-	
-#endregion
-#region Fuentes.
-
-	#macro ft_small 6
-	#macro ft_medium 12
-	#macro ft_large 18
-
-#endregion
-#region Teclado/Mando.
-
-	#macro vk_block 144
-	#macro vk_capital 20
-	#macro joy_deadzone 0.3
-	
 #endregion
 #region Colors.
 

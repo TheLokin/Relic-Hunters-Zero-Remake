@@ -6,4 +6,4 @@
  *	Returns: boolean.
  */
 
-return keyboard_check(global.keyboard_up1) || keyboard_check(global.keyboard_up2);
+return keyboard_check(global.keyboard_up);

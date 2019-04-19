@@ -66,12 +66,12 @@ if (!global.pause) {
 	#region Animation.
 			
 		if (is_throwing) {
-			play_animation(animation.melee, 0.25, an_clamp_forever, pr_high);
+			play_animation(animation.melee, 0.25, an_clamp, pr_hight);
 		} else if (move_speed > 0) {
 			if (is_dashing) {
 				if (current_animation != animation.dash) {
-					create_dash_fx(id);
-					audio_play(audio_emitter, false, pr_high, sfx_dash1, sfx_dash2, sfx_dash3);
+					create_dash_fx(id, sprite_dash_fx);
+					audio_play(audio_emitter, false, pr_hight, sfx_dash1, sfx_dash2, sfx_dash3);
 				}
 				play_animation(animation.dash, 0.16, an_loop, pr_low);
 			} else {
@@ -80,7 +80,6 @@ if (!global.pause) {
 		} else {
 			play_animation(animation.idle, 0.16, an_loop, pr_low);
 		}
-		//depth = -y;
 		update_animation();
 		
 	#endregion

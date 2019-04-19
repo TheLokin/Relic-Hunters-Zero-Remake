@@ -1,3 +1,3 @@
-/// @description Destroy
+/// @description Change fade
 
-instance_destroy();
+alpha_speed *= -1;

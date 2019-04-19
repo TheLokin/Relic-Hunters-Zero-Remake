@@ -1,6 +1,6 @@
 /// @description Variables
 
-direction = point_direction(x, y, global.player.crosshair_x, global.player.crosshair_y);
+direction = point_direction(x, y, global.player1.crosshair_x, global.player1.crosshair_y);
 image_angle = direction;
 
 #region Projectile.

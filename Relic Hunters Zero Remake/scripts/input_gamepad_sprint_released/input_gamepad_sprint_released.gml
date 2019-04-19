@@ -6,5 +6,4 @@
  *	Returns: boolean.
  */
 
-return global.gamepad != noone && (gamepad_button_check_released(global.gamepad, global.gamepad_sprint1) ||
-								   gamepad_button_check_released(global.gamepad, global.gamepad_sprint2));
+return global.gamepad != noone && (gamepad_button_check_released(global.gamepad, global.gamepad_sprint) || global.double_tap && gamepad_button_check_released(global.gamepad, global.gamepad_dash));

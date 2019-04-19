@@ -6,4 +6,4 @@
  *	Returns: boolean.
  */
 
-return mouse_check_button(global.keyboard_aim);
+return mouse_check_button(global.mouse_aim);

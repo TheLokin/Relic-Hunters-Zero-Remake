@@ -14,7 +14,11 @@ switch (room) {
 		global.volume_music = button_music.option;
 	break;
 	case rm_menu3:
-		controller_game.option_fullscreen = button_fullscreen.option;
-		controller_game.option_resolution = button_resolution.option;
+		global.fullscreen = button_fullscreen.option;
+		global.resolution = button_resolution.option;
+		global.vsync = button_vsync.option;
+	break;
+	case rm_menu4:
+		global.double_tap = button_double_tap.option;
 	break;
 }

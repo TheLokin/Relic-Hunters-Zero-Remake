@@ -2,6 +2,7 @@
 
 event_inherited();
 
-if (!window_get_fullscreen() && (minus_button.update || plus_button.update)) {
-	resolution_update(option);
+if (execute_action) {
+	text_secondary = string(controller_game.resolutions[option, 0])+" x "+string(controller_game.resolutions[option,1]);
+	window_set_resolution(option);
 }

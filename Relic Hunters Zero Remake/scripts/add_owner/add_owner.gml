@@ -1,7 +1,7 @@
 /*
  *	add_owner(owner)
  *
- *	Create a list for the instances binded to the owner.
+ *	Create a list for the instances linked to the owner.
  *
  *	owner: the identifier of the owner.
  *

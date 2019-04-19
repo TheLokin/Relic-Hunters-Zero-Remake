@@ -1,3 +1,3 @@
-/// @description Permitir la interacción del mando
+/// @description Allow interaction
 
 allow_input = true;

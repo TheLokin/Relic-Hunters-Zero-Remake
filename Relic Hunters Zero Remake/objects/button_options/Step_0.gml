@@ -3,5 +3,5 @@
 event_inherited();
 
 if (execute_action) {
-	room_goto(rm_menu2);
+	create_fade_fx(rm_menu2);
 }

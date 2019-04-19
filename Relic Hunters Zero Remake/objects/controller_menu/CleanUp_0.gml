@@ -1,5 +1,12 @@
 /// @description Free up memory
 
-if (ds_exists(grid_button, ds_type_grid)) {
-	ds_grid_destroy(grid_button);
+switch (room) {
+	case rm_menu1:
+		controller_game.button_menu1 = button_selected;
+	break;
+	case rm_menu2:
+		if (button_selected != button_confirm && button_selected != button_cancel) {
+			controller_game.button_menu2 = button_selected;
+		}
+	break;
 }

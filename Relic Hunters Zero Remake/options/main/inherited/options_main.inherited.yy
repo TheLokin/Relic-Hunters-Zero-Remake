@@ -2,7 +2,8 @@
     "option_gameguid": "29b9dac0-a040-44ed-968e-f139ab7da8f0",
     "option_lastchanged": "08 September 2018 21:45:58",
     "option_game_speed": 60,
-    "option_sci_usesci": true
+    "option_sci_usesci": true,
+    "option_spine_licence": true
 }←be5f1418-b31b-48af-a023-f04cdf6e5121|{
     "textureGroups": {
         "Additions": [

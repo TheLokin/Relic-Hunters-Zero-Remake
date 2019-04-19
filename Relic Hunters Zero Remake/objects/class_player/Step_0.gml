@@ -14,42 +14,32 @@ if (!global.pause) {
 	
 				if (joystick_deadzone_check(_horizontal_axis, _vertical_axis, joy_deadzone)) {
 					_dash_direction = point_direction(0, 0, _horizontal_axis, _vertical_axis);
-					
 					motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
 				}
-			} else {
-				if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
-					motion_add(90, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 90;
-				}
-				if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
-					motion_add(270, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 270;
-				}
-				if (!input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
-					motion_add(180, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 180;
-				}
-				if (!input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
-					motion_add(0, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 0;
-				}
-				if (input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
-					motion_add(135, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 135;
-				}
-				if (!input_keyboard_up() && input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
-					motion_add(225, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 225;
-				}
-				if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
-					motion_add(45, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 45;
-				}
-				if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
-					motion_add(315, move_acceleration*delta_time*ms_to_s_60);
-					_dash_direction = 315;
-				}
+			} else if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
+				_dash_direction = 90;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && !input_keyboard_right()) {
+				_dash_direction = 270;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (!input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
+				_dash_direction = 180;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (!input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
+				_dash_direction = 0;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (input_keyboard_up() && !input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
+				_dash_direction = 135;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (!input_keyboard_up() && input_keyboard_down() && input_keyboard_left() && !input_keyboard_right()) {
+				_dash_direction = 225;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (input_keyboard_up() && !input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
+				_dash_direction = 45;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
+			} else if (!input_keyboard_up() && input_keyboard_down() && !input_keyboard_left() && input_keyboard_right()) {
+				_dash_direction = 315;
+				motion_add(_dash_direction, move_acceleration*delta_time*ms_to_s_60);
 			}
 			
 		#endregion
@@ -73,7 +63,7 @@ if (!global.pause) {
 			
 			var _dash_pressed = false;
 			
-			if (global.allow_double_tap) {
+			if (global.double_tap) {
 				if (input_keyboard_dash_pressed() || input_gamepad_dash_pressed()) {
 					double_tap_timer++;
 					double_tap_interval = 0;
@@ -102,7 +92,7 @@ if (!global.pause) {
 				} else {
 					direction = 180+point_direction(x, y, crosshair_x, crosshair_y);
 				}
-				create_dash_fx(id);
+				create_dash_fx(id, sprite_dash_fx);
 			}
 			if (is_dashing) {
 				current_dash_time += delta_time;
@@ -381,7 +371,7 @@ if (!global.pause) {
 				current_sprint_time += delta_time;
 				if (current_sprint_time >= sprint_duration) {
 					current_sprint_time = 0;
-					create_sprint_fx(id);
+					create_sprint_fx(id, sprite_sprint_fx);
 				}
 			break;
 			default:

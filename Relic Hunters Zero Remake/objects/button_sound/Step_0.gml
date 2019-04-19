@@ -1,7 +1,8 @@
-/// @description Acciones
+/// @description Actions
 
 event_inherited();
 
-if (minus_button.update || plus_button.update) {
+if (execute_action) {
+	text_secondary = string(option);
 	set_sound_volume(option);
 }

@@ -1,7 +1,7 @@
 /*
  *	delete_owner(owner)
  *
- *	Delete the list of instances bind to the owner.
+ *	Delete the list of instances linked to the owner.
  *
  *	owner: the identifier of the owner.
  *

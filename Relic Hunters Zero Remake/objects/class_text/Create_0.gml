@@ -1,6 +1,6 @@
 /// @description Variables
 
-#region Information.
+#region Text.
 
 	font_key = noone;			// Key associated to the font.
 	font = noone;				// Text font.

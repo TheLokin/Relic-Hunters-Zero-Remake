@@ -20,9 +20,7 @@ if (ds_exists(controller_game.map_languages, ds_type_map)) {
 	if (!is_undefined(_map_font) && ds_exists(_map_font, ds_type_map)) {
 		var _font = ds_map_find_value(_map_font, _key);
 		
-		if (is_undefined(_font)) {
-			return noone;
-		} else {
+		if (!is_undefined(_font)) {
 			return _font;
 		}
 	}

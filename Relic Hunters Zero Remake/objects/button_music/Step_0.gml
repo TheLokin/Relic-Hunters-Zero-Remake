@@ -2,6 +2,7 @@
 
 event_inherited();
 
-if (minus_button.update || plus_button.update) {
+if (execute_action) {
+	text_secondary = string(option);
 	set_music_volume(option);
 }

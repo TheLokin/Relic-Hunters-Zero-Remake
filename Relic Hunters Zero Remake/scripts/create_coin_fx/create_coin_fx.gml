@@ -19,9 +19,7 @@
 #endregion
 
 repeat(irandom_range(_min, _max)) {
-	var _coin = instance_create_layer(_owner.x, _owner.y, "interactive", fx_coin);
-	
-	with (_coin) {
+	with (instance_create_layer(_owner.x, _owner.y, "interactive", fx_coin)) {
 		height_max += 10;
 		depth = _owner.depth-2;
 		direction = irandom_range(0, 1);

@@ -2,9 +2,24 @@
 
 event_inherited();
 
-#region Information.
+#region Actions.
 
-	label_code = "button_music";		// Código del texto.
-	event_user(0);						// Textos.
+	button_above = button_sound;		// Button above.
+	button_below = button_window;		// Button below.
+	button_left = arrow_left;			// Button left.
+	button_right = arrow_right;			// Button right.
 	
+#endregion
+#region Options.
+
+	option = global.volume_music;		// Option selected.
+	max_option = 10;					// Maximum number of options.
+
+#endregion
+#region Text.
+
+	language_key = "menu.volume.music";			// Key associated to the language.
+	text = get_lang_value(language_key);		// Text.
+	text_secondary = string(option);			// Secondary text.
+
 #endregion

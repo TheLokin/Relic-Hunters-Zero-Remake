@@ -2,8 +2,15 @@
 
 event_inherited();
 
-#region Information.
+#region Actions.
+
+	button_above = button_play;		// Button above.
+	button_below = button_exit;		// Button below.
 	
-	text = get_lang_value("menu.options");		// Text.
+#endregion
+#region Text.
+	
+	language_key = "menu.options";				// Key associated to the language.
+	text = get_lang_value(language_key);		// Text.
 	
 #endregion

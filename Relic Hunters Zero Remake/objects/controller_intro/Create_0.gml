@@ -1,8 +1,11 @@
 /// @description Variables
 
-#region Information.
-
-	is_destroyed = false;			// Logo destruido.
-	menu_time = room_speed*0.5;		// Tiempo hasta cambiar al menú.
+#region Animation.
+	
+	visible = false;					// Logo visible.
+	is_logo_show = false;				// Logo.
+	current_alpha = 0;					// Current alpha.
+	alpha_speed = 0.015;				// Alpha speed.
+	logo_duration = room_speed*2;		// Duration of the logo.
 
 #endregion

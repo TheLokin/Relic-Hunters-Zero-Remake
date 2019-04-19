@@ -10,7 +10,7 @@
     "option_mac_app_id": "com.company.game",
     "option_mac_build_app_store": false,
     "option_mac_copyright": "(c) 2018 CompanyName",
-    "option_mac_display_cursor": true,
+    "option_mac_display_cursor": false,
     "option_mac_display_name": "Made in GameMaker Studio 2",
     "option_mac_enable_retina": false,
     "option_mac_enable_steam": false,
@@ -18,7 +18,7 @@
     "option_mac_interpolate_pixels": false,
     "option_mac_menu_dock": false,
     "option_mac_output_dir": "~\/GameMakerStudio2\/Mac",
-    "option_mac_resize_window": false,
+    "option_mac_resize_window": true,
     "option_mac_scale": 0,
     "option_mac_signing_identity": "Developer ID Application:",
     "option_mac_splash_png": "${base_options_dir}\\mac\\splash\\splash.png",
@@ -27,9 +27,9 @@
     "option_mac_texture_page": "2048x2048",
     "option_mac_version": {
         "build": 0,
-        "major": 1,
+        "major": 0,
         "minor": 0,
         "revision": 0
     },
-    "option_mac_vsync": false
+    "option_mac_vsync": true
 }

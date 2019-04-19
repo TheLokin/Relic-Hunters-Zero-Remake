@@ -6,4 +6,4 @@
  *	Returns: boolean.
  */
 
-return keyboard_check(global.keyboard_sprint);
+return keyboard_check(global.keyboard_sprint) || global.double_tap && keyboard_check(global.keyboard_dash);

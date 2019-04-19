@@ -6,4 +6,4 @@
  *	Returns: boolean.
  */
 
-return keyboard_check_pressed(global.keyboard_switch) || global.allow_wheel_mouse && (mouse_wheel_up() || mouse_wheel_down());
+return keyboard_check_pressed(global.keyboard_switch) || mouse_wheel_up() || mouse_wheel_down();
