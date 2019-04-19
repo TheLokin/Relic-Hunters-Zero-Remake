@@ -1,0 +1,20 @@
+[
+	{
+		"code": "ES",
+		"src": "es.json",
+		"font": {
+			"src": "latin.ttf",
+			"first": 21,
+			"last": 171
+		}
+	},
+	{
+		"code": "EN",
+		"src": "en.json",
+		"font": {
+			"src": "latin.ttf",
+			"first": 21,
+			"last": 128
+		}
+	}
+]

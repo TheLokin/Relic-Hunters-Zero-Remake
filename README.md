@@ -2,13 +2,13 @@
   <img alt="Relic Hunters Logo" src="http://www.roguesnail.com/wordpress/wp-content/uploads/2014/08/RelicHuntersMainBanner.jpg" />
   <h1 align="center">Relic Hunters Zero Remake</h1>
   <p align="center">
-    <a href="https://www.reddit.com/user/TheLokin">
+    <a href="https://www.reddit.com/user/TheLokin" target="_blank">
       <img alt="Reddit" src="https://img.shields.io/badge/contact-reddit-orange.svg">
     </a>
-    <a href="https://trello.com/b/IHybMw8Z/relic-hunters-zero-remake">
+    <a href="https://trello.com/b/IHybMw8Z/relic-hunters-zero-remake" target="_blank">
       <img alt="Trello" src="https://img.shields.io/badge/to%20do-trello-brightgreen.svg">
     </a>
-    <a href="https://thelokin.gitbook.io/relic-hunters-zero-remake">
+    <a href="https://thelokin.gitbook.io/relic-hunters-zero-remake" target="_blank">
       <img alt="GitBook" src="https://img.shields.io/badge/docs-gitbook-blue.svg">
     </a>
   </p>
