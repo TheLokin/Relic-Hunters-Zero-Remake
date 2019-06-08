@@ -67,6 +67,10 @@
 #region Dig spot.
 
 	dirt_color = c_magenta;
-	grid_depth = noone;
 
+#endregion
+#region Depth system.
+
+	queue_depth = ds_priority_create();
+	
 #endregion

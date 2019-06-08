@@ -10,11 +10,11 @@ if (controller_game.mouse_input) {
 	if (_button != noone) {	
 		button_selected = _button;
 		button_selected.is_selected = true;
-		if (!is_changing && button_selected.is_avaliable && input_keyboard_confirm_pressed()) {
+		if (!is_changing && button_selected.is_avaliable && mouse_check_button_pressed(global.mouse_confirm)) {
 			button_selected.execute_action = true;
 		}
 	}
-	if (instance_exists(button_cancel) && input_keyboard_cancel_pressed()) {
+	if (instance_exists(button_cancel) && keyboard_check_pressed(global.keyboard_cancel)) {
 		button_cancel.execute_action = true;
 	}
 } else if (button_selected == noone) {
@@ -63,13 +63,13 @@ if (controller_game.mouse_input) {
 			} else if (_joystick_direction >= 315 || _joystick_direction < 45) {
 				_button = button_selected.button_right;
 			}
-		} else if (input_keyboard_up() || input_gamepad_up()) {
+		} else if (keyboard_check(global.keyboard_up) || gamepad_button_check(global.gamepad, global.gamepad_up)) {
 			_button = button_selected.button_above;
-		} else if (input_keyboard_down() || input_gamepad_down()) {
+		} else if (keyboard_check(global.keyboard_down) || gamepad_button_check(global.gamepad, global.gamepad_down)) {
 			_button = button_selected.button_below;
-		} else if (input_keyboard_left() || input_gamepad_left()) {
+		} else if (keyboard_check(global.keyboard_left) || gamepad_button_check(global.gamepad, global.gamepad_left)) {
 			_button = button_selected.button_left;
-		} else if (input_keyboard_right() || input_gamepad_right()) {
+		} else if (keyboard_check(global.keyboard_right) || gamepad_button_check(global.gamepad, global.gamepad_right)) {
 			_button = button_selected.button_right;
 		}
 		if (_button != noone) {
@@ -84,9 +84,11 @@ if (controller_game.mouse_input) {
 			}
 		}
 	}
-	if (!is_changing && button_selected.is_avaliable && (input_gamepad_confirm_pressed() ||  input_keyboard_confirm_pressed())) {
+	if (!is_changing && button_selected.is_avaliable && (gamepad_button_check_pressed(global.gamepad, global.gamepad_confirm) ||
+		keyboard_check_pressed(global.keyboard_confirm))) {
 		button_selected.execute_action = true;
-	} else if (instance_exists(button_cancel) && (input_gamepad_cancel_pressed() || input_keyboard_cancel_pressed())) {
+	} else if (instance_exists(button_cancel) && (gamepad_button_check_pressed(global.gamepad, global.gamepad_cancel) ||
+			   keyboard_check_pressed(global.keyboard_cancel))) {
 		button_cancel.execute_action = true;
 	}
 }

@@ -34,3 +34,4 @@
 	recoil_return = 1.25;		//
 
 #endregion
+shot = false;

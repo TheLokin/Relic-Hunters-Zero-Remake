@@ -14,6 +14,7 @@ switch (room) {
 		if (global.gamepad == noone) {
 			cursor_sprite = spr_crosshair1;
 		}
-		instance_create_layer(0, 0, "controller", controller_level);
+		instance_create_layer(0, 0, "interactive", controller_level);
+		instance_create_layer(0, 0, "interactive", controller_lighting);
 	break;
 }

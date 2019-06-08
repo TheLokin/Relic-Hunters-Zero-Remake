@@ -10,6 +10,7 @@
 
 #region Parameters.
 
+	/// @params key
 	var _key = argument0;
 	
 #endregion

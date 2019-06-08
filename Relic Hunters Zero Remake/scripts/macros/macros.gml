@@ -23,10 +23,13 @@
 	#macro ft_small 6
 	#macro ft_medium 12
 	#macro ft_large 18
-
+	//#macro ft_ font_add_sprite(spr_ft, ord(" "), false, 2)
+	
 #endregion
 #region Animation.
 
+	#macro draw_over 1
+	#macro draw_under -1
 	#macro ms_to_s_60 0.00006
 	enum animation {
 		idle,

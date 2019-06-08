@@ -1,5 +1,5 @@
 /*
- *	audio_play(emitter, loop, priority, sound1, [sound2, sound3, ...])
+ *	audio_play(emitter, loop, priority, sound)
  *
  *	Plays one of the sounds passed as parameters.
  *
@@ -13,12 +13,16 @@
 
 #region Parameters.
 
-	var _emitter = argument[0];
-	var _loop = argument[1];
-	var _priority = argument[2];
+	/// @params emitter
+	var _emitter = argument0;
+	/// @params loop
+	var _loop = argument1;
+	/// @params priority
+	var _priority = argument2;
+	/// @params sound
+	var _sound = argument3;
 
 #endregion
 
-// function choose
 
-audio_play_sound_on(_emitter, argument[irandom_range(3, argument_count-1)], _loop, _priority);
+audio_play_sound_on(_emitter, _sound, _loop, _priority);

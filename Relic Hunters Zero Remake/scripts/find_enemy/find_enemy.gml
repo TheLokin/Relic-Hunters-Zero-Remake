@@ -12,8 +12,11 @@
 
 #region Parameters.
 
+	/// @params x
 	var _x = argument0;
+	/// @params y
 	var _y = argument1;
+	/// @params rangle
 	var _range = argument2;
 
 #endregion

@@ -12,8 +12,11 @@
 
 #region Parameters.
 
+	/// @params angle
 	var _angle = argument0;
+	/// @params target
 	var _target = argument1;
+	/// @params speed
 	var _speed = argument2;
 
 #endregion

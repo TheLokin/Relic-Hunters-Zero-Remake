@@ -12,8 +12,11 @@
 
 #region Parameters.
 
+	/// @params horizontal_axis
 	var _horizontal_axis = argument0;
+	/// @params vertical_axis
 	var _vertical_axis = argument1;
+	/// @params deadzone
 	var _deadzone = argument2;
 
 #endregion

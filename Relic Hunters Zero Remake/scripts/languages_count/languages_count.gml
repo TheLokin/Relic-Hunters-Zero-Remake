@@ -6,7 +6,7 @@
  *	Return: integer.
  */
 
-if (ds_exists(controller_game.map_owners, ds_type_map)) {
+if (ds_exists(controller_game.map_languages, ds_type_map)) {
 	var _list_languages = ds_map_find_value(controller_game.map_languages, "default");
 	
 	return ds_list_size(_list_languages);

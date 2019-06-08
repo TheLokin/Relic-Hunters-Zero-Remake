@@ -11,6 +11,7 @@
 
 #region Parameters.
 
+	/// @params index
 	var _index = argument0;
 
 #endregion

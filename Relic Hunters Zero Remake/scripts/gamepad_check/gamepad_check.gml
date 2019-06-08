@@ -10,6 +10,7 @@
 
 #region Parameters.
 
+	/// @params gamepad
 	var _gamepad = argument0;
 
 #endregion

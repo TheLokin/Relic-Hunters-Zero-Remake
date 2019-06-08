@@ -3,7 +3,8 @@
 #region Information.
 	
 	owner = noone;		// The owner that perform the dash.
-
+	add_draw(id);		// Add to draw.
+	
 #endregion
 #region Animation.
 

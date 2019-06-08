@@ -13,8 +13,11 @@
 
 #region Parameters.
 
+	/// @params owner
 	var _owner = argument0;
+	/// @params min
 	var _min = argument1;
+	/// @params max
 	var _max = argument2;
 
 #endregion
@@ -22,7 +25,6 @@
 repeat(irandom_range(_min, _max)) {
 	with (instance_create_layer(_owner.x+11*_owner.image_xscale, _owner.y-13, "interactive", fx_dirt)) {
 		height_max += 10;
-		depth = _owner.depth-2;
 		if (place_meeting(x, y, obj_collision)) {
 			if (_owner.image_xscale == -1) {
 				direction = 180;

@@ -1,11 +1,6 @@
 /// @description Actions
 
 if (!global.pause) {
-	#region Movement.
-	
-		//path_update();
-	
-	#endregion
 	#region AI.
 		
 		if (hit_taken) {
@@ -66,21 +61,21 @@ if (!global.pause) {
 	#region Animation.
 			
 		if (is_throwing) {
-			play_animation(animation.melee, 0.25, an_clamp, pr_hight);
+			animation_play(animation.melee, 0.25, an_clamp, pr_hight);
 		} else if (move_speed > 0) {
 			if (is_dashing) {
 				if (current_animation != animation.dash) {
 					create_dash_fx(id, sprite_dash_fx);
-					audio_play(audio_emitter, false, pr_hight, sfx_dash1, sfx_dash2, sfx_dash3);
+					audio_play(audio_emitter, false, pr_hight, choose(sfx_dash1, sfx_dash2, sfx_dash3));
 				}
-				play_animation(animation.dash, 0.16, an_loop, pr_low);
+				animation_play(animation.dash, 0.16, an_loop, pr_low);
 			} else {
-				play_animation(animation.walk, 0.16, an_loop, pr_low);
+				animation_play(animation.walk, 0.16, an_loop, pr_low);
 			}
 		} else {
-			play_animation(animation.idle, 0.16, an_loop, pr_low);
+			animation_play(animation.idle, 0.16, an_loop, pr_low);
 		}
-		update_animation();
+		animation_update();
 		
 	#endregion
 	#region Sound.

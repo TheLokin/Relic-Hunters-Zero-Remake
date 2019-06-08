@@ -3,13 +3,13 @@
 #region Information.
 
 	global.debug = true;					// Debug mode.
-	map_owners = ds_map_create();			// Map with the owners who performs the actions.
+	grid_depth = noone;						// Grid with the instances that should be drawn.
 	global.player1 = noone;					// Player one.
 	global.pause = false;					// Pause.
 	previous_mouse_x = mouse_x;				// The previous x position of the mouse.
 	previous_mouse_y = mouse_y;				// The previous y position of the mouse.
-	button_menu1 = noone;					// Button selected in menu 1.
-	button_menu2 = noone;					// Button selected in menu 2.
+	button_menu1 = noone;					// The button selected in menu 1.
+	button_menu2 = noone;					// The button selected in menu 2.
 	gamepad = get_gamepad_connected();		// The first gamepad detected.
 	global.gamepad = noone;					// Gamepad.
 	mouse_input = true;						// If the interaction is with the mouse.

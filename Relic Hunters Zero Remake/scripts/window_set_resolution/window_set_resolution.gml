@@ -10,6 +10,7 @@
 
 #region Parameters.
 
+	/// @params resolution
 	var _resolution = argument0;
 
 #endregion

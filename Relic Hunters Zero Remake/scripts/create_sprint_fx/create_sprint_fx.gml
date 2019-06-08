@@ -1,18 +1,20 @@
 /*
- *	create_sprint_fx(owner, sprite)
+ *	create_sprint_fx(sprite, owner)
  *
  *	Plays the sprint effect for the owner.
  *
- *	owner: the owner that perform the sprint.
- *	sprite: the sprite to draw.
+ *	sprite: the sprite of the sprint.
+ *	owner: the owner to assign the sprint.
  *
  *	Return: N/A.
  */
 
 #region Parameters.
 
-	var _owner = argument0;
-	var _sprite = argument1;
+	/// @params sprite
+	var _sprite = argument0;
+	/// @params owner
+	var _owner = argument1;
 
 #endregion
 

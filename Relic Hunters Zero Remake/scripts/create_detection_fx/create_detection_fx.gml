@@ -10,6 +10,7 @@
 
 #region Parameters.
 
+	/// @params owner
 	var _owner = argument0;
 
 #endregion

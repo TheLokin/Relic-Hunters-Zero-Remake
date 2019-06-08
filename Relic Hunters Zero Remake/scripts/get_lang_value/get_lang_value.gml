@@ -11,7 +11,9 @@
 
 #region Parameters.
 
+	/// @params key
 	var _key = argument[0];
+	/// @params option
 	var _option = argument_count == 2 ? argument[1] : noone;
 
 #endregion

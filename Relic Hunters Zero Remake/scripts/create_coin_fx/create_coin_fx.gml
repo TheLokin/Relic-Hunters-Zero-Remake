@@ -12,8 +12,11 @@
 
 #region Parameters.
 
+	/// @params owner
 	var _owner = argument0;
+	/// @params min
 	var _min = argument1;
+	/// @params max
 	var _max = argument2;
 
 #endregion

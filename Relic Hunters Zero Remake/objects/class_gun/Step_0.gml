@@ -1,6 +1,6 @@
 /// @description Actions
 
-if (!global.pause) {
+if (!global.pause && owner != noone) {
 	switch (object_get_parent(owner.object_index)) {
 		case class_player:
 			#region Orientation.
@@ -9,14 +9,12 @@ if (!global.pause) {
 				image_xscale = owner.image_xscale;
 				if (is_selected) {
 					y = owner.y-8;
-					depth = owner.depth-1;
 					image_angle = point_direction(x, y, owner.crosshair_x, owner.crosshair_y);
 					if (image_xscale == -1) {
 						image_angle += 180;
 					}
 				} else {
 					y = owner.y-16;
-					depth = owner.depth+1;
 					if (image_xscale == 1) {
 						image_angle = 130;
 						x -= 4;
@@ -31,17 +29,18 @@ if (!global.pause) {
 				if (!owner.is_digging && owner.current_animation != animation.dig) {
 					#region Shot.
 	
-						if (input_keyboard_shot() || input_gamepad_shot()) {
-							if (current_ammo > 0) {
-								var _projectile = instance_create_layer(x+sprite_width, y, "interactive", projectile);
-								_projectile.image_xscale = image_xscale;
+						if (mouse_check_button(global.mouse_shot) || gamepad_button_check(global.gamepad, global.gamepad_shot)) {
+							if (!shot && current_ammo > 0) {
+								shot = true;
+								alarm[0] = room_speed*0.2;
+								create_projectile(projectile, owner);
 							}
 						}
 	
 					#endregion
 					#region Reload.
 		
-						if (input_keyboard_reload()) {
+						if (keyboard_check(global.keyboard_reload)) {
 							is_reloading = true;
 						}
 						if (is_reloading) {

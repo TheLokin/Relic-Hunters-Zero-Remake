@@ -10,8 +10,10 @@
  */
 
 #region Parameters.
-
+	
+	/// @params room
 	var _room = argument[0];
+	/// @params speed
 	var _speed = argument_count == 2 ? argument[1] : 0.08;
 	
 #endregion

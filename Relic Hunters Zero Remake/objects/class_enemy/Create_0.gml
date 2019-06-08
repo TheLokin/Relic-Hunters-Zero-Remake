@@ -3,13 +3,13 @@
 #region Information.
 
 	is_elite = false;
-
+	add_draw(id);											// Add to draw.
+	link_draw(id, create_dynamic_bar(id), draw_over);		// Link the dynamic bar to draw with the enemy.
+	
 #endregion
 #region Spawn.
 
-	is_vulnerable = true;																// If the enemy is vulnerable.
-	add_owner(id);																		// Create the list of instances linked to the enemy.
-	link_owner(id, instance_create_layer(x, y, "interactive_over", dynamic_bar));		// Link the dynamic bar to the enemy.
+	is_vulnerable = true;		// If the enemy is vulnerable.
 
 #endregion
 #region Health.
@@ -64,19 +64,15 @@
 #endregion
 #region Animation.
 
-	sprite_detection_fx = spr_detection;		// Sprite with the effect when the enemy detect a player.
-	sprite_idle = noone;						// Sprite with the animation when the enemy is idle.
-	sprite_walk = noone;						// Sprite with the animation when the enemy is walking.
-	sprite_sprint = noone;						// Sprite with the animation when the enemy is sprinting.
-	sprite_dash = noone;						// Sprite with the animation when the enemy is dashing.
-	sprite_dash_fx = noone;						// Sprite with the effect when the enemy is dashing.
-	sprite_hit = noone;							// Sprite with the animation when the enemy is hit.
-	sprite_death = noone;						// Sprite with the animation when the enemy dies.
-	current_animation = animation.idle;			// Animation playing.
-	animation_index = 0;						// Frame of the animation.
-	animation_speed = 0.16;						// Speed of the animation.
-	animation_type = an_loop;					// Duration of the animation.
-	animation_priority = pr_low;				// Priority of the animation.
+	sprite_detection_fx = spr_detection;				// Sprite with the effect when the enemy detect a player.
+	sprite_idle = noone;								// Sprite with the animation when the enemy is idle.
+	sprite_walk = noone;								// Sprite with the animation when the enemy is walking.
+	sprite_sprint = noone;								// Sprite with the animation when the enemy is sprinting.
+	sprite_dash = noone;								// Sprite with the animation when the enemy is dashing.
+	sprite_dash_fx = noone;								// Sprite with the effect when the enemy is dashing.
+	sprite_hit = noone;									// Sprite with the animation when the enemy is hit.
+	sprite_death = noone;								// Sprite with the animation when the enemy dies.
+	animation_init(animation.idle, 0.16, an_loop);		// Initialize the animation engine.
 	
 #endregion
 #region Sound.

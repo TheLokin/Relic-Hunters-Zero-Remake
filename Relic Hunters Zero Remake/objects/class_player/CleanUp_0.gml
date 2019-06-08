@@ -1,4 +1,4 @@
 /// @description Free up memory
 
-delete_owner(id);
+delete_draw(id);
 audio_emitter_free(audio_emitter);
